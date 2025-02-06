@@ -1,4 +1,4 @@
-FROM node:12-slim
+ROM node:latest
 WORKDIR /usr/src/app
 COPY package.json ./
 RUN npm install
