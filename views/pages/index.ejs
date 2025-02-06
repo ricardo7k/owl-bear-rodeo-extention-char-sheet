@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/wanted.svg" />
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OSdS</title>
+  </head>
+  <body>
+    <div class="content">
+      <div class="ui-line box-salvar">
+        <fieldset class="char-box">
+          <div class="atributo">
+            <select id="personagens">
+              <option value="---">Selecione o Jogador</option>
+            </select>
+            <input type="button" id="add" name="add" value="+">
+            <input type="button" id="remove" name="remove" value="-">
+          </div>
+        </fieldset>
+      </div>
+      <div class="ui-line">
+        <fieldset class="char-box">
+          <legend>Personagem</legend>
+          <div class="content-box"> 
+            <div class="name-box">
+              <legend>Nome</legend>
+              <input type="text" name="char_name" id="char_name" value="">
+            </div>
+            <div class="level-box">
+              <legend>Nível</legend>
+                <input type="text" name="char_level" id="char_level" value="">
+            </div>
+          </div>
+          <div class="content-box support-box">
+            <fieldset>
+              <legend>Vida</legend>
+              <input type="text" name="char_vida" id="char_vida" value="">
+            </fieldset>
+            <fieldset>
+              <legend>Defesa</legend>
+              <input type="text" name="char_def" id="char_def" value="">
+            </fieldset>
+            <fieldset>
+              <legend>Init.</legend>
+              <input type="text" name="char_init" id="char_init" value="">
+            </fieldset>
+            <fieldset>
+              <legend>Ações</legend>
+              <input type="text" name="char_acoes" id="char_acoes" value="">
+            </fieldset>
+            <fieldset>
+              <legend>Dados</legend>
+              <input type="number" name="char_dados" id="char_dados" value="1" min="1" max="99" style="width:40px">
+              <span id="roll-dados" class="icon-dice-solo"></span>
+            </fieldset>
+          </div>
+        </fieldset>
+      </div>
+      <div class="ui-line">
+          <div class="content-box support-box money">
+            <fieldset>
+              <legend>US$</legend>
+              <input type="text" name="money" id="money" value="">
+            </fieldset>
+            <fieldset>
+              <legend>Recompensa</legend>
+              <input type="text" name="recompensa" id="recompensa" value="">
+            </fieldset>
+          </div>
+      </div>
+      <div class="ui-line">
+        <fieldset class="attr-box">
+          <legend>Atributos</legend>
+          <div class="atributo">
+            <label for="fisico">Físico:</label>
+            <input type="range" id="fisico" name="fisico" min="0" max="5" value="0">
+            <span id="fisicoValor">0</span>
+            <span id="roll-fisico" class="icon-dice"></span>
+          </div>
+          <div class="atributo">
+            <label for="agilidade">Agilidade:</label>
+            <input type="range" id="agilidade" name="agilidade" min="0" max="5" value="0">
+            <span id="agilidadeValor">0</span>
+            <span id="roll-agilidade" class="icon-dice"></span>
+          </div>
+          <div class="atributo">
+            <label for="intelecto">Intelecto:</label>
+            <input type="range" id="intelecto" name="intelecto" min="0" max="5" value="0">
+            <span id="intelectoValor">0</span>
+            <span id="roll-intelecto" class="icon-dice"></span>
+          </div>
+          <div class="atributo">
+            <label for="coragem">Coragem:</label>
+            <input type="range" id="coragem" name="coragem" min="0" max="5" value="0">
+            <span id="coragemValor">0</span>
+            <span id="roll-coragem" class="icon-dice"></span>
+          </div>
+        </fieldset>
+      </div>
+      <div class="ui-line">
+        <fieldset class="attr-box">
+          <legend>Antecedentes</legend>
+          <div class="atributo">
+            <label for="combate">Combate:</label>
+            <input type="range" id="combate" name="combate" min="0" max="5" value="0">
+            <span id="combateValor">0</span>
+            <span id="roll-combate" class="icon-dice"></span>
+          </div>
+          <div class="atributo">
+            <label for="negocios">Negócios:</label>
+            <input type="range" id="negocios" name="negocios" min="0" max="5" value="0">
+            <span id="negociosValor">0</span>
+            <span id="roll-negocios" class="icon-dice"></span>
+          </div>
+          <div class="atributo">
+            <label for="montaria">Montaria:</label>
+            <input type="range" id="montaria" name="montaria" min="0" max="5" value="0">
+            <span id="montariaValor">0</span>
+            <span id="roll-montaria" class="icon-dice"></span>
+          </div>
+          <div class="atributo">
+            <label for="tradicao">Tradicao:</label>
+            <input type="range" id="tradicao" name="tradicao" min="0" max="5" value="0">
+            <span id="tradicaoValor">0</span>
+            <span id="roll-tradicao" class="icon-dice"></span>
+          </div>
+          <div class="atributo">
+            <label for="labuta">Labuta:</label>
+            <input type="range" id="labuta" name="labuta" min="0" max="5" value="0">
+            <span id="labutaValor">0</span>
+            <span id="roll-labuta" class="icon-dice"></span>
+          </div>
+          <div class="atributo">
+            <label for="exploracao">Exploração:</label>
+            <input type="range" id="exploracao" name="exploracao" min="0" max="5" value="0">
+            <span id="exploracaoValor">0</span>
+            <span id="roll-exploracao" class="icon-dice"></span>
+          </div>
+          <div class="atributo">
+            <label for="roubo">Roubo:</label>
+            <input type="range" id="roubo" name="roubo" min="0" max="5" value="0">
+            <span id="rouboValor">0</span>
+            <span id="roll-roubo" class="icon-dice"></span>
+          </div>
+          <div class="atributo">
+            <label for="medicina">Medicina:</label>
+            <input type="range" id="medicina" name="medicina" min="0" max="5" value="0">
+            <span id="medicinaValor">0</span>
+            <span id="roll-medicina" class="icon-dice"></span>
+          </div>
+        </fieldset>
+      </div>
+      <div class="ui-line">
+        <fieldset class="attr-box">
+          <legend>Tormento</legend>
+          <div class="atributo">
+            <textarea id="tormento"></textarea>
+          </div>
+        </fieldset>
+      </div>
+      <div class="ui-line">
+        <fieldset class="attr-box">
+          <legend>Habilidades</legend>
+          <div class="atributo">
+            <textarea id="habilidades"></textarea>
+          </div>
+        </fieldset>
+      </div>
+      <div class="ui-line">
+        <fieldset class="attr-box">
+          <legend>Anotações</legend>
+          <div class="atributo">
+            <textarea id="anotacoes"></textarea>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="ui-line">
+        <fieldset class="char-box equip-box">
+          <legend>Equipamento</legend>
+          <div class="content-box"> 
+            <div class="name-box">
+              <legend></legend>
+            </div>
+            <div class="level-box">
+              <legend>Dano | </legend>
+            </div>
+            <div class="level-box">
+              <legend>Bonus |</legend>
+            </div>
+            <div class="level-box">
+              <legend>Roll</legend>
+            </div>
+          </div>
+          <div class="content-box"> 
+            <div class="name-box">
+              <input type="text" name="equipamento_1" id="equipamento_1" value="">
+            </div>
+            <div class="level-box">
+                <input type="text" id="dano_1" name="dano_1" value="">
+            </div>
+            <div class="level-box">
+              <input type="number" id="bonus_1" name="bonus_1" value="">
+            </div>
+            <span id="roll-equipamento_1" class="icon-dice-equip"></span>
+          </div>
+          <div class="content-box"> 
+            <div class="name-box">
+              <input type="text" name="equipamento_2" id="equipamento_2" value="">
+            </div>
+            <div class="level-box">
+              <input type="text" id="dano_2" name="dano_2" value="">
+            </div>
+            <div class="level-box">
+              <input type="number" id="bonus_2" name="bonus_2" value="">
+            </div>
+            <span id="roll-equipamento_2" class="icon-dice-equip"></span>
+          </div>
+          <div class="content-box"> 
+            <div class="name-box">
+              <input type="text" name="equipamento_3" id="equipamento_3" value="">
+            </div>
+            <div class="level-box">
+              <input type="text" id="dano_3" name="dano_3" value="">
+            </div>
+            <div class="level-box">
+              <input type="number" id="bonus_3" name="bonus_3" value="">
+            </div>
+            <span id="roll-equipamento_3" class="icon-dice-equip"></span>
+          </div>
+          <div class="content-box"> 
+            <div class="name-box">
+              <input type="text" name="equipamento_4" id="equipamento_4" value="">
+            </div>
+            <div class="level-box">
+              <input type="text" id="dano_4" name="dano_4" value="">
+            </div>
+            <div class="level-box">
+              <input type="number" id="bonus_4" name="bonus_4" value="">
+            </div>
+            <span id="roll-equipamento_4" class="icon-dice-equip"></span>
+          </div>
+          <div class="content-box"> 
+            <div class="name-box">
+              <input type="text" name="equipamento_5" id="equipamento_5" value="">
+            </div>
+            <div class="level-box">
+              <input type="text" id="dano_5" name="dano_5" value="">
+            </div>
+            <div class="level-box">
+              <input type="number" id="bonus_5" name="bonus_5" value="">
+            </div>
+            <span id="roll-equipamento_5" class="icon-dice-equip"></span>
+          </div>
+          <div class="content-box"> 
+            <div class="name-box">
+              <input type="text" name="equipamento_6" id="equipamento_6" value="">
+            </div>
+            <div class="level-box">
+              <input type="text" id="dano_6" name="dano_6" value="">
+            </div>
+            <div class="level-box">
+              <input type="number" id="bonus_6" name="bonus_6" value="">
+            </div>
+            <span id="roll-equipamento_6" class="icon-dice-equip"></span>
+          </div>
+          <div class="content-box"> 
+            <div class="name-box">
+              <input type="text" name="equipamento_7" id="equipamento_7" value="">
+            </div>
+            <div class="level-box">
+              <input type="text" id="dano_7" name="dano_7" value="">
+            </div>
+            <div class="level-box">
+              <input type="number" id="bonus_7" name="bonus_7" value="">
+            </div>
+            <span id="roll-equipamento_7" class="icon-dice-equip"></span>
+          </div>
+          <div class="content-box"> 
+            <div class="name-box">
+              <input type="text" name="equipamento_8" id="equipamento_8" value="">
+            </div>
+            <div class="level-box">
+              <input type="text" id="dano_8" name="dano_8" value="">
+            </div>
+            <div class="level-box">
+              <input type="number" id="bonus_8" name="bonus_8" value="">
+            </div>
+            <span id="roll-equipamento_8" class="icon-dice-equip"></span>
+          </div>
+          <div class="content-box"> 
+            <div class="name-box">
+              <input type="text" name="equipamento_9" id="equipamento_9" value="">
+            </div>
+            <div class="level-box">
+              <input type="text" id="dano_9" name="dano_9" value="">
+            </div>
+            <div class="level-box">
+              <input type="number" id="bonus_9" name="bonus_9" value="">
+            </div>
+
+            <span id="roll-equipamento_9" class="icon-dice-equip"></span>
+          </div>
+          <div class="content-box"> 
+            <div class="name-box">
+              <input type="text" name="equipamento_10" id="equipamento_10" value="">
+            </div>
+            <div class="level-box">
+              <input type="text" id="dano_10" name="dano_10" value="">
+            </div>
+            <div class="level-box">
+              <input type="number" id="bonus_10" name="bonus_10" value="">
+            </div>
+            <span id="roll-equipamento_10" class="icon-dice-equip"></span>
+          </div>
+        </fieldset>
+      </div>
+      <div class="ui-line">
+        <fieldset class="char-box">
+          <legend>Reputação</legend>
+          <div class="atributo">
+            <input type="range" id="reputacao" name="reputacao" min="-5" max="5" value="0">
+            <span id="reputacaoValor">0</span>
+            <span id="roll-reputacao" class="icon-dice"></span>
+          </div>
+        </fieldset>
+      </div>
+      <div class="ui-line box-salvar">
+        <fieldset class="char-box">
+          <div class="atributo">
+            <input type="button" id="salvar" name="salvar" value="Salvar">
+          </div>
+        </fieldset>
+      </div>
+      <div id="app"></div>
+      <div id="box_results">
+      <fieldset>
+        <legend id="box_results_formula"></legend>
+        <div id="box_results_result"></div>
+      </fieldset>
+    </div>
+    <script type="module" src="dice-box.js"></script>
+    <script type="text/javascript">
+      function atualizarValor(sliderId, valorId) {
+        const slider = document.getElementById(sliderId);
+        const valor = document.getElementById(valorId);
+        valor.textContent = slider.value;
+      }
+      function geid(id) {
+       return document.querySelector("#" + id);
+      }
+      function clearTela() {
+          geid("char_name").value = "";
+          geid("char_level").value = "";
+          geid("char_vida").value = "";
+          geid("char_acoes").value = "";
+          geid("char_def").value = "";
+          geid("char_init").value = "";
+          geid("money").value = "";
+          geid("recompensa").value = "";
+
+          geid("fisicoValor").textContent = geid("fisico").value = "";
+          geid("intelectoValor").textContent = geid("intelecto").value = "";
+          geid("coragemValor").textContent = geid("coragem").value = "";
+          geid("agilidadeValor").textContent = geid("agilidade").value = "";
+
+          geid("combateValor").textContent = geid("combate").value = "";
+          geid("negociosValor").textContent = geid("negocios").value = "";
+          geid("montariaValor").textContent = geid("montaria").value = "";
+          geid("tradicaoValor").textContent = geid("tradicao").value = "";
+          geid("labutaValor").textContent = geid("labuta").value = "";
+          geid("exploracaoValor").textContent = geid("exploracao").value = "";
+          geid("rouboValor").textContent = geid("roubo").value = "";
+          geid("medicinaValor").textContent = geid("medicina").value = "";
+
+          geid("tormento").value = "";
+          geid("habilidades").value = "";
+          geid("anotacoes").value = "";
+          for(var i=0; i<8; i++) { 
+            var p = Number(i)+1;
+            geid(`equipamento_${p}`).value = "";
+            geid(`dano_${p}`).value = "";
+            geid(`bonus_${p}`).value = "";
+          }
+          geid("reputacaoValor").textContent = geid("reputacao").value = "";
+      }
+      function updateTela(person) {
+        try {
+          geid("char_name").value = person.nome;
+          if(!person.nivel) return;
+          geid("char_level").value = person.nivel;
+          geid("char_vida").value = person.vida;
+          geid("char_acoes").value = person.acoes;
+          geid("char_def").value = person.defesa;
+          geid("char_init").value = person.init;
+          geid("money").value = person.dollar;
+          geid("recompensa").value = person.recompensa;
+
+          geid("fisicoValor").textContent = geid("fisico").value = person.atributos.fisico;
+          geid("intelectoValor").textContent = geid("intelecto").value = person.atributos.intelecto;
+          geid("coragemValor").textContent = geid("coragem").value = person.atributos.coragem;
+          geid("agilidadeValor").textContent = geid("agilidade").value = person.atributos.agilidade;
+
+          geid("combateValor").textContent = geid("combate").value = person.antecedentes.combate;
+          geid("negociosValor").textContent = geid("negocios").value = person.antecedentes.negocios;
+          geid("montariaValor").textContent = geid("montaria").value = person.antecedentes.montaria;
+          geid("tradicaoValor").textContent = geid("tradicao").value = person.antecedentes.tradicao;
+          geid("labutaValor").textContent = geid("labuta").value = person.antecedentes.labuta;
+          geid("exploracaoValor").textContent = geid("exploracao").value = person.antecedentes.exploracao;
+          geid("rouboValor").textContent = geid("roubo").value = person.antecedentes.roubo;
+          geid("medicinaValor").textContent = geid("medicina").value = person.antecedentes.medicina;
+
+          geid("tormento").value = person.tormento;
+          geid("habilidades").value = person.habilidades;
+          geid("anotacoes").value = person.anotacoes;
+          for(i in person.equipamentos) {
+            var p = Number(i)+1;
+            geid(`equipamento_${p}`).value = person.equipamentos[i].nome;
+            geid(`dano_${p}`).value = person.equipamentos[i].dano;
+            geid(`bonus_${p}`).value = person.equipamentos[i].bonus;
+          }
+          geid("reputacaoValor").textContent = geid("reputacao").value = person.reputacao;
+        } catch(e) {
+
+        }
+      }
+      function selecionaPersonagem(e) {
+        selectedId = geid(e.target.id).value
+        if(selectedId=="---") {
+          clearTela();
+        } else {
+          const selectedPerson = personasArr.find(persona => persona.id === selectedId);
+          updateTela(selectedPerson.person);
+        }
+      }
+      function salvarPersonagem(e) {
+        selectedId = geid("personagens").value
+        const person = personasArr.find(persona => persona.id === selectedId).person;
+        person.nome = geid("char_name").value;
+        person.nivel = geid("char_level").value;
+        person.vida = geid("char_vida").value ;
+        person.acoes = geid("char_acoes").value ;
+        person.defesa = geid("char_def").value;
+        person.init = geid("char_init").value ;
+        person.dollar = geid("money").value;
+        person.recompensa = geid("recompensa").value;
+        if(!person.atributos) person.atributos = {}
+        person.atributos.fisico = geid("fisico").value;
+        person.atributos.intelecto = geid("intelecto").value;
+        person.atributos.coragem = geid("coragem").value;
+        person.atributos.agilidade = geid("agilidade").value;
+        if(!person.antecedentes) person.antecedentes = {}
+        person.antecedentes.combate = geid("combate").value;
+        person.antecedentes.negocios = geid("negocios").value;
+        person.antecedentes.montaria = geid("montaria").value;
+        person.antecedentes.tradicao = geid("tradicao").value;
+        person.antecedentes.labuta = geid("labuta").value;
+        person.antecedentes.exploracao = geid("exploracao").value;
+        person.antecedentes.roubo = geid("roubo").value;
+        person.antecedentes.medicina = geid("medicina").value;
+        person.tormento =geid("tormento").value;
+        person.habilidades = geid("habilidades").value;
+        person.anotacoes = geid("anotacoes").value;
+        person.reputacao = geid("reputacao").value;
+        person.equipamentos = []
+        for(let j=0; j<8; j++) {
+          var p = Number(j)+1;
+          person.equipamentos.push({
+            nome: geid(`equipamento_${p}`).value,
+            dano: geid(`dano_${p}`).value,
+            bonus: geid(`bonus_${p}`).value
+          })
+        }
+
+        fetch('/salvar', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            documentId: selectedId,
+            dados: person,
+          }),
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            window.location.href = "/";
+          } else {
+            console.info('Erro ao salvar dados: ' + data.error);
+          }
+        })
+        .catch(error => {
+          console.error('Erro na requisição:', error);
+        });
+      }
+      function addPersonagem(e){
+        fetch('/add', { 
+          method: 'POST',
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            var opt = document.createElement("option")
+            opt.value = data.id;
+            opt.textContent = data.nome;
+            geid("personagens").appendChild(opt);
+          } else {
+            console.info('Erro ao salvar dados: ' + data.error);
+          }
+        })
+        .catch(error => {
+          console.error('Erro na requisição:', error);
+        });
+      }
+      function removePersonagem(e){
+        selectedId = geid("personagens").value
+        fetch('/del', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            documentId: selectedId
+          }),
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            window.location.href = "/";
+          } else {
+            console.info('Erro ao salvar dados: ' + data.error);
+          }
+        })
+        .catch(error => {
+          console.error('Erro na requisição:', error);
+        });
+      }
+      var arrBtns = document.getElementsByClassName("icon-dice");
+      for(var i=0; i<arrBtns.length; i++) {
+        var bt = arrBtns[i];
+        var lab = bt.id.split("roll-").join("");
+        geid(lab).addEventListener('input', (e) => atualizarValor(e.target.id.split("roll-").join(""), `${e.target.id.split("roll-").join("")}Valor`));
+      }
+      var personasArr = <%- JSON.stringify(personas) %>; 
+      for(i in personasArr) {
+        var opt = document.createElement("option")
+        opt.value = personasArr[i].id;
+        opt.textContent = personasArr[i].person.nome;
+        geid("personagens").appendChild(opt)
+      }
+      geid("personagens").addEventListener('change', selecionaPersonagem)
+      geid("remove").addEventListener('click', removePersonagem)
+      geid("add").addEventListener('click', addPersonagem)
+      geid("salvar").addEventListener('click', salvarPersonagem)
+      window.onload = function(){ geid("app").style.display = "none";}
+    </script>
+  </body>
+</html>

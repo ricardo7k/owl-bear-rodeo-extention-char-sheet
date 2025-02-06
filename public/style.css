@@ -1,0 +1,390 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#app {
+  top: 0;
+  left: 0;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+}
+
+.content {
+  width: 100vw;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: table;
+  place-items: center;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+fieldset {
+  border-radius: 10px 10px 0 0;
+  box-sizing: border-box;
+  border-color: #213547;
+  margin: 5px;
+  background-color: #1c1c1c;
+}
+
+fieldset legend {
+  font-size: 12px;
+  color: #FFCC00;
+}
+
+textarea {
+  width: 100%;
+  height: 40px;
+}
+
+#box_results {
+  position: fixed;
+  background: url('textures/wood.webp');
+  width: 80vw;
+  height: calc(30vw);
+  left: 10%;
+  display: none;
+  color: #0e0e0e;
+  border-radius: 12px 12px 0 0;
+  bottom: -100%;
+  box-shadow: 1px -15px 40px #00000077;
+  animation: appear 1s ease forwards;
+}
+
+@keyframes appear {
+  to{
+    bottom: 0;
+  }
+}
+
+#box_results fieldset {
+  color: #FFCC00;
+  backdrop-filter: invert(26%) sepia(25%) saturate(705%) hue-rotate(335deg) brightness(15%) contrast(90%);
+  border: 0;
+  border-radius: 10px 10px 0 0;
+  display: flex;
+  width: 100%;
+  margin: 0;
+  background-color: transparent;
+}
+#box_results fieldset legend {
+  line-height: 10px;
+  font-size: 14px;
+  font-weight: 400px;
+}
+#box_results fieldset div {
+  justify-content: center;
+  font-size: 30px;
+  font-weight: 500;
+  display: flex;
+  width: 100%;
+  align-content: center;
+  flex-wrap: wrap;
+  background-color: #00000022;
+  border-radius: 10px;
+}
+
+.ui-controls {
+  display: table-column;
+}
+
+.ui-controls .ui-line {
+  display: table-row;
+}
+
+.level-box input{
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  text-align: center;
+}
+
+
+.name-box {
+  display: flex;
+  flex-direction: column; 
+  align-items: flex-start;
+  flex-grow: 1; /* Permite que a name-box se expanda */
+}
+
+.char-box {
+  display: flex;          
+  flex-direction: column; 
+  align-items: center;   
+}
+
+.char-box legend { 
+  align-self: flex-start; 
+  font-size: 1rem; 
+}
+
+.content-box {  
+  display: flex;
+  width: 100%;
+  align-items: flex-start; 
+  gap: 20px; 
+}
+
+.name-box, .level-box {
+  display: flex;
+  flex-direction: column; 
+  align-items: flex-start; 
+}
+
+.name-box legend, .level-box legend {
+  font-size: 0.8rem; 
+  margin-bottom: 5px;  
+}
+
+.name-box input {
+  height: 30px;
+  font-size: 20px;
+  width: 100%;  
+  flex-grow: 1; /* Permite que o input se expanda */
+}
+
+
+.level-box input {
+  flex: 0 0 auto;  
+}
+
+
+.support-box {
+  gap: 0;
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+}
+
+.support-box fieldset {
+  background-color: #3b3b3b;
+  border: 0;
+  text-align: center;
+}
+
+.support-box fieldset legend{
+  font-size: 9px;
+}
+
+
+.support-box fieldset input {
+  border: 0;
+  background-color: #3b3b3b;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  text-align: center;
+}
+
+
+
+.attr-box {
+  display: flex; 
+  flex-direction: column;
+}
+
+.atributo {
+  display: flex; /* Define cada div.atributo como um container flex */
+  width: 100%; /* Garante que cada div ocupe toda a largura do fieldset */
+  align-items: center; /* Alinha os itens verticalmente ao centro */
+}
+
+.atributo label {
+  flex: 1; /* O label ocupa o espaço disponível restante */
+}
+
+.atributo input {
+  flex: 2; /* O input ocupa o dobro do espaço do label */
+}
+
+.atributo span {
+  flex: .25; /* Cada span ocupa a mesma quantidade de espaço que o label */
+  text-align: center; /* Centraliza o texto nos spans */
+}
+
+.icon-dice, .icon-dice-equip, .icon-dice-solo {
+  background-image: url(dice-d6.png);
+  background-repeat: no-repeat;
+  background-size: 20px;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  filter: invert(51%) sepia(91%) saturate(223%) hue-rotate(162deg) brightness(95%) contrast(102%);
+  cursor: pointer; 
+}
+
+#fisicoValor,
+#agilidadeValor,
+#intelectoValor,
+#coragemValor {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+
+.money fieldset input {
+  width: 30vw;
+}
+
+.level-box legend {
+  font-size: 0.7rem;
+}
+
+.equip-box .level-box input {
+  font-size: 14px;
+  width: 30px;
+  margin: 5px 3px;
+}
+.equip-box .content-box{
+  gap: 0;
+}
+
+.equip-box .icon-dice-equip {
+  display: flex;
+  top: 10px;
+  position: relative;
+
+}
+
+#salvar, #add, #remove {
+  flex: none;
+  width: 40px; /* Ajusta o padding do botão */
+  background-color: #213547; /* Cor de fundo inicial (exemplo) */
+  color: white; /* Cor do texto */
+  border: none; /* Remove a borda padrão do botão */
+  border-radius: 5px; /* Arredonda os cantos do botão */
+  cursor: pointer; /* Muda o cursor para "ponteiro" ao passar por cima */
+  transition: background-color 0.3s ease;
+  font-size: 25px;
+  height: 40px;
+  margin: 0 3px;
+}
+
+#salvar {
+  width: 80px;
+  font-size: 14px;
+}
+
+#salvar:hover, #add:hover, #remove:hover {
+  background-color: #45a049; /* Cor de fundo ao passar o mouse (mais escura) */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra suave ao passar o mouse */
+}
+#remove:hover {
+  background-color: #FF3333; /* Cor de fundo ao passar o mouse (mais escura) */
+} 
+
+#salvar:active, #add:active, #remove:active {
+  background-color: #3e8e41; /* Cor de fundo ao clicar (mais escura ainda) */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Sombra menor ao clicar */
+  transform: translateY(1px); /* Levemente para baixo ao clicar */
+}
+
+.box-salvar {
+  display: flex; /* Ativa o flexbox para centralizar */
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente (se precisar) */
+}
+.box-salvar .char-box {
+  /* Outros estilos que você já tem para o char-box */
+  padding: 20px; /* Exemplo de padding */
+  border: 1px solid #ccc; /* Exemplo de borda */
+  border-radius: 8px; /* Arredonda os cantos do fieldset */
+  width: 100vw;
+}
+
+.box-salvar .atributo {
+  display: flex;
+  justify-content: center; /* Centraliza o botão dentro do atributo */
+}
+
+/* Estilos para o select */
+select {
+  padding: 10px;
+  border: 0;
+  border-radius: 5px;
+  font-size: 16px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-chevron-down' viewBox='0 0 16 16'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") no-repeat right 10px center; /* Use white fill */
+  background-color: #213547;
+  padding-right: 40px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+  margin: 0 10px 0 0;
+}
+
+select:hover {
+  border-color: #999; /* Cor da borda ao passar o mouse */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+select:focus {
+  outline: none; /* Remove a borda de foco padrão */
+  border-color: #66afe9; /* Cor da borda ao receber foco (exemplo) */
+  box-shadow: 0 0 5px rgba(102, 175, 233, .6); /* Sombra ao receber foco (exemplo) */
+}
+
+/* Estilos para as opções do select (opcional) */
+select option {
+  padding: 5px;
+}
+
+/*@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+*/

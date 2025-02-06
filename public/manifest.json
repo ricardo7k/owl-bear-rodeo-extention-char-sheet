@@ -1,0 +1,14 @@
+{
+  "name": "O Som das Seis - Character Sheet",
+  "version": "1.0.0",
+  "author": "RFO.IM",
+  "icon": "/wanted.png",
+  "manifest_version": 1,
+  "action": {
+    "title": "OSdS - Character Sheet",
+    "icon": "/wanted.svg",
+    "popover": "/",
+    "height": 600,
+    "width": 400
+  }
+}
