@@ -4,7 +4,7 @@ const app = express();
 
 app.use(express.json()); // Habilita o parsing de JSON no body das requisições
 
-const port =x 8080;
+const port = 8080;
 
 const admin = require('firebase-admin');
 const serviceAccount = require('./nova-key.json'); 
