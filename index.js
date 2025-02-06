@@ -4,8 +4,6 @@ const app = express();
 
 app.use(express.json()); // Habilita o parsing de JSON no body das requisições
 
-const port = 8080;
-
 const admin = require('firebase-admin');
 const serviceAccount = require('./nova-key.json'); 
 admin.initializeApp({
@@ -84,6 +82,6 @@ app.get("/", (req, res) => {
 app.use(express.static(__dirname+"/public"));
 
 
-app.listen(port, () => {
-  console.log(`Running ${port}`);
+app.listen(8080, () => {
+  console.log("Running 8080");
 });
