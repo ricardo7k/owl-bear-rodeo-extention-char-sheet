@@ -1,4 +1,4 @@
-ROM node:latest
+ROM node:23-slim
 WORKDIR /usr/src/app
 COPY package.json ./
 RUN npm install
