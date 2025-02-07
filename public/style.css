@@ -86,7 +86,7 @@ textarea {
   position: fixed;
   background: url('textures/wood.webp');
   width: 80vw;
-  height: calc(30vw);
+  height: calc(40vw);
   left: 10%;
   display: none;
   color: #0e0e0e;
@@ -113,7 +113,7 @@ textarea {
   background-color: transparent;
 }
 #box_results fieldset legend {
-  line-height: 10px;
+/*  line-height: 10px;*/
   font-size: 14px;
   font-weight: 400px;
 }

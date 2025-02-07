@@ -2,7 +2,9 @@ const express = require("express");
 const cors = require('cors');
 const app = express();
 
-app.use(express.json()); // Habilita o parsing de JSON no body das requisições
+
+
+app.use(express.json());
 
 const admin = require('firebase-admin');
 const serviceAccount = require('./nova-key.json'); 
@@ -11,7 +13,7 @@ admin.initializeApp({
 });
 const db = admin.firestore();
 
-async function listarPersonagens(req, res, _html, oid) {
+async function listarPersonagens(req, res, _html) {
   var arrPersonas = []
   try {
     const personagensRef = db.collection('personagens');
@@ -31,12 +33,13 @@ app.post('/salvar', (req, res) => {
 
   db.collection('personagens').doc(documentId).set(dados)
     .then(() => {
-      res.json({ success: true }); // Envia uma resposta JSON de sucesso
+      res.json({ success: true, id:documentId });
     })
     .catch(error => {
       res.status(500).json({ success: false, error: error.message }); // Envia uma resposta JSON de erro
     });
 });
+
 app.post('/del', (req, res) => {
   const documentId = req.body.documentId;
 
@@ -77,6 +80,12 @@ app.set('view engine', 'ejs');
 
 app.get("/", (req, res) => {
   listarPersonagens(req, res, 'pages/index')
+});
+
+app.get("/pop/:key", (req, res) => {
+  res.render('pages/pop', { 
+    key:req.params.key
+  });
 });
 
 app.use(express.static(__dirname+"/public"));

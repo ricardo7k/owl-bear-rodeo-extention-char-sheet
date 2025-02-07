@@ -9,11 +9,10 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@3d-dice/dice-box-threejs": "^0.0.12",
     "cors": "^2.8.5",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
-    "firebase": "^11.2.0",
-    "firebase-admin": "^13.0.2"
+    "firebase-admin": "^13.0.2",
+    "socket.io": "^4.8.1"
   }
 }

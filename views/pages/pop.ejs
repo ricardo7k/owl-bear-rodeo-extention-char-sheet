@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/wanted.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <title>OSdS</title>
+  </head>
+  <body>
+    <div class="content">
+        <div id="app"></div>
+        <div id="box_results">
+        <fieldset>
+          <legend id="box_results_formula"></legend>
+          <div id="box_results_result"></div>
+        </fieldset>
+      </div> 
+    </div>
+    <script type="module">
+        import OBR from "https://cdn.skypack.dev/@owlbear-rodeo/sdk";
+        import DiceBox from "/dice-box-threejs.es.js";
+        var rolagem = "";
+        var bonus = "";
+
+        OBR.onReady(async () => {
+            OBR.scene.onMetadataChange((metadata) => {
+                var sheet = metadata["im.rfo/sheet"];
+                rolagem = sheet.rolagem;
+                bonus = sheet.bonus;
+                Box.roll(sheet.roll.split("#")[0])
+            })
+            OBR.scene.setMetadata(
+              {
+               "im.rfo/muda": { 
+                  muda: `muda`
+                } 
+              }
+            )
+        })
+
+        function geid(id) {
+            return document.querySelector("#" + id);
+        }
+        const Box = new DiceBox("#app", {
+            theme_customColorset: {
+                background: "#5C4033",
+                foreground: "#FFCC00",
+                texture: "wood",
+                material: "wood",
+            },
+            light_intensity: 1,
+            gravity_multiplier: 600,
+            baseScale: 100,
+            strength: 2,
+            onRollComplete: (results) => {
+                var forumla = `<p><span>${rolagem} | ${results.notation.split("@")[0]}+(${bonus}) :</span></p>`
+                var oresultado = "";
+                var total = 0;
+                for(var i=0;i<results.result.length; i++){
+                  var dist = i==results.result.length-1?"":"+";
+                  oresultado += `${results.result[i]}${dist}`;
+                  total += Number(results.result[i]);
+                }
+                total += Number(bonus)
+                geid("box_results_formula").innerHTML = `${forumla}`;
+                geid("box_results_result").innerHTML = `${oresultado}+(${bonus})=${total}`;
+                geid("box_results").style.display = "flex";
+            },
+        });
+        Box.initialize();
+    </script>
+</body>
