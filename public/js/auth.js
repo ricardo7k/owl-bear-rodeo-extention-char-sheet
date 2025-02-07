@@ -34,7 +34,7 @@ async function logout() {
     }
 }
 
-async function readData() {
+export async function readData() {
   const idToken = await auth.currentUser.getIdToken();
   const response = await fetch('/list', {
       method: 'GET',
@@ -47,19 +47,32 @@ async function readData() {
     throw new Error(`Erro ao ler dados do servidor: ${response.status} - ${errorText}`);
   } 
   ntimes+=1;
-  if(ntimes>1) {
+  if(ntimes==1) {
     ntimes=0
     _idToken = idToken;
     const data = await response.json();
     personasArr = data.personas;
-
-    getid("personagens").style.display = "block";
+    if(personasArr.length>0) {
+      getid("personagens").style.display = "block";
+      getid("personagens").selectedIndex = 0;
+      setTimeout(()=>{
+        getid("personagens").dispatchEvent(new Event("change"), selecionaPersonagem);
+      }, 50);
+      getid("planilha").style.display= "block";
+    } else  {
+      console.info("ZERO ARRAY");
+      getid("planilha").style.display= "none";
+      getid("personagens").style.display = "none";
+      getid("remove").style.display = "none";
+    }
     getid("add").style.display = "block";
-    getid("remove").style.display = "block";
     getid("login-container").style.display = "none";
     createSelect();
   }
+  getid("overblock").style.display = "none";
 }
+window.readData = readData; // Torna a função global
+
 
 getid('google-login-button').addEventListener('click', googleLogin);
 
@@ -68,6 +81,7 @@ onAuthStateChanged(auth, (user) => {
     oid = user.uid;
     readData();
   } else {
+    getid("overblock").style.display = "none";
     console.info("Nenhum usuário autenticado.");
   }
 })

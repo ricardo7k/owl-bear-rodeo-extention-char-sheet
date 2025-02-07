@@ -8,6 +8,7 @@
     <title>OSdS</title>
   </head>
   <body>
+    <div id="overblock"><span class="loader"></span></div>
     <div class="content">
       <div class="ui-line box-salvar">
         <fieldset class="char-box">
@@ -16,7 +17,6 @@
           </div>
           <div class="atributo" id="seleciona">
             <select id="personagens" style="display:none">
-              <option value="---">Selecione o Jogador</option>
             </select>
             <input type="button" id="add" name="add" value="+" style="display:none">
             <input type="button" id="remove" name="remove" value="-" style="display:none">
@@ -26,6 +26,8 @@
           </div>
         </fieldset>
       </div>
+    </div>
+    <div class="content" id="planilha" style="display:none;">
       <div class="ui-line">
         <fieldset class="char-box">
           <legend>Personagem</legend>

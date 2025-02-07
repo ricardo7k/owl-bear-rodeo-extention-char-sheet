@@ -1,3 +1,4 @@
+
 function atualizarValor(sliderId, valorId) {
   const slider = document.getElementById(sliderId);
   const valor = document.getElementById(valorId);
@@ -51,58 +52,56 @@ function clearTela() {
 }
 
 function updateTela(person) {
-  try {
-    getid("char_name").value = person.nome;
-    if(!person.nivel) return;
-    getid("char_level").value = person.nivel;
-    getid("char_vida").value = person.vida;
-    getid("char_acoes").value = person.acoes;
-    getid("char_def").value = person.defesa;
-    getid("char_init").value = person.init;
-    getid("money").value = person.dollar;
-    getid("recompensa").value = person.recompensa;
 
-    getid("fisicoValor").textContent = getid("fisico").value = person.atributos.fisico;
-    getid("intelectoValor").textContent = getid("intelecto").value = person.atributos.intelecto;
-    getid("coragemValor").textContent = getid("coragem").value = person.atributos.coragem;
-    getid("agilidadeValor").textContent = getid("agilidade").value = person.atributos.agilidade;
+    getid("char_name").value = person.nome || "";
 
-    getid("combateValor").textContent = getid("combate").value = person.antecedentes.combate;
-    getid("negociosValor").textContent = getid("negocios").value = person.antecedentes.negocios;
-    getid("montariaValor").textContent = getid("montaria").value = person.antecedentes.montaria;
-    getid("tradicaoValor").textContent = getid("tradicao").value = person.antecedentes.tradicao;
-    getid("labutaValor").textContent = getid("labuta").value = person.antecedentes.labuta;
-    getid("exploracaoValor").textContent = getid("exploracao").value = person.antecedentes.exploracao;
-    getid("rouboValor").textContent = getid("roubo").value = person.antecedentes.roubo;
-    getid("medicinaValor").textContent = getid("medicina").value = person.antecedentes.medicina;
+    getid("char_level").value = person.nivel || "";
+    getid("char_vida").value = person.vida || "";
+    getid("char_acoes").value = person.acoes || "";
+    getid("char_def").value = person.defesa || "";
+    getid("char_init").value = person.init || "";
+    getid("money").value = person.dollar || "";
+    getid("recompensa").value = person.recompensa || "";
 
-    getid("tormento").value = person.tormento;
-    getid("habilidades").value = person.habilidades;
-    getid("anotacoes").value = person.anotacoes;
+    if(person.atributos) {
+      getid("fisicoValor").textContent = getid("fisico").value = person.atributos.fisico || "";
+      getid("intelectoValor").textContent = getid("intelecto").value = person.atributos.intelecto || "";
+      getid("coragemValor").textContent = getid("coragem").value = person.atributos.coragem || "";
+      getid("agilidadeValor").textContent = getid("agilidade").value = person.atributos.agilidade || "";
+    }
+
+    if(person.antecedentes) {
+      getid("combateValor").textContent = getid("combate").value = person.antecedentes.combate || "";
+      getid("negociosValor").textContent = getid("negocios").value = person.antecedentes.negocios || "";
+      getid("montariaValor").textContent = getid("montaria").value = person.antecedentes.montaria || "";
+      getid("tradicaoValor").textContent = getid("tradicao").value = person.antecedentes.tradicao || "";
+      getid("labutaValor").textContent = getid("labuta").value = person.antecedentes.labuta || "";
+      getid("exploracaoValor").textContent = getid("exploracao").value = person.antecedentes.exploracao || "";
+      getid("rouboValor").textContent = getid("roubo").value = person.antecedentes.roubo || "";
+      getid("medicinaValor").textContent = getid("medicina").value = person.antecedentes.medicina || "";
+    }
+
+    getid("tormento").value = person.tormento || "";
+    getid("habilidades").value = person.habilidades || "";
+    getid("anotacoes").value = person.anotacoes || "";
     for(i in person.equipamentos) {
       var p = Number(i)+1;
-      getid(`equipamento_${p}`).value = person.equipamentos[i].nome;
-      getid(`dano_${p}`).value = person.equipamentos[i].dano;
-      getid(`bonus_${p}`).value = person.equipamentos[i].bonus;
+      getid(`equipamento_${p}`).value = person.equipamentos[i].nome || "";
+      getid(`dano_${p}`).value = person.equipamentos[i].dano || "";
+      getid(`bonus_${p}`).value = person.equipamentos[i].bonus || "";
     }
-    getid("reputacaoValor").textContent = getid("reputacao").value = person.reputacao;
-  } catch(e) {
+    getid("reputacaoValor").textContent = getid("reputacao").value = person.reputacao || "";
 
-  }
 }
 
 function selecionaPersonagem(e) {
+  clearTela();
   selectedId = getid(e.target.id).value
-  if(selectedId=="---") {
-    clearTela();
-  } else {
-    const selectedPerson = personasArr.find(persona => persona.id === selectedId);
-    console.info(selectedPerson)
-    if(selectedPerson) {
-      updateTela(selectedPerson.person);
-    } else {
-      clearTela();
-    }
+  const selectedPerson = personasArr.find(persona => persona.id === selectedId);
+  if(selectedPerson) {
+    updateTela(selectedPerson.person);
+    getid("remove").style.display = "block";
+    getid("planilha").style.display = "block";
   }
 }
 
@@ -113,7 +112,9 @@ function showBox(m) {
 }
 
 function salvarPersonagem(e) {
+  getid("overblock").style.display = "flex";
   selectedId = getid("personagens").value
+  var oidx = getid("personagens").selectedIndex
   const person = personasArr.find(persona => persona.id === selectedId).person;
   person.nome = getid("char_name").value;
   person.nivel = getid("char_level").value;
@@ -168,8 +169,13 @@ function salvarPersonagem(e) {
     if (data.success) {
       getid("personagens").textContent = "";
       createSelect();
-      getid("personagens").value = data.id;
-      showBox("Personagem modificado com successo.")
+      // getid("personagens").value = data.id;
+      showBox("Personagem modificado com successo.");
+      getid("overblock").style.display = "none";
+      getid("personagens").selectedIndex = oidx;
+      setTimeout(()=>{
+        getid("personagens").dispatchEvent(new Event("change"), selecionaPersonagem);
+      }, 100);
     } else {
       console.info('Erro ao salvar dados: ' + data.error);
     }
@@ -180,32 +186,59 @@ function salvarPersonagem(e) {
 }
 
 function addPersonagem(e){
-  console.info(oid);
-  fetch('/add', { 
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${_idToken}`
-    },
-    body: JSON.stringify({
-      userId: oid
-    }),
+  getid("overblock").style.display = "flex";
+  clearTela();
+  fetch('/name', { 
+    method: 'GET',
   })
   .then(response => response.json())
   .then(data => {
-    if (data.success) {
-      clearTela();
-      var opt = document.createElement("option")
-      opt.value = data.id;
-      opt.textContent = data.nome;
-      getid("personagens").appendChild(opt);
-      personasArr.push({id:data.id, person:{nome:data.nome}})
-      getid("personagens").value = data.id;
-      getid("char_name").value = data.nome;
-      showBox("Personagem criado.");
-    } else {
-      console.info('Erro ao salvar dados: ' + data.error);
-    }
+    fetch(`/history/${data.name}`, { 
+      method: 'GET',
+    })
+    .then(response => response.json())
+    .then(data => {
+      fetch('/add', { 
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${_idToken}`
+        },
+        body: JSON.stringify({
+          userId: oid,
+          name: data.name,
+          history: data.history
+        }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          var opt = document.createElement("option")
+          opt.value = data.id;
+          opt.textContent = data.nome;
+          const oidx = getid("personagens").appendChild(opt);
+          personasArr.push({id:data.id, person:{nome:data.nome, anotacoes:data.anotacoes}})
+          getid("personagens").value = data.id;
+          getid("anotacoes").value = String(data.anotacoes);
+          getid("char_name").value = data.nome;
+          showBox("Personagem criado.");
+          getid("personagens").style.display = "block";
+          getid("personagens").selectedIndex = oidx.index;
+          setTimeout(()=>{
+            getid("personagens").dispatchEvent(new Event("change"), selecionaPersonagem);
+          }, 100);
+          getid("overblock").style.display = "none";
+        } else {
+          console.info('Erro ao salvar dados: ' + data.error);
+        }
+      })
+      .catch(error => {
+        console.error('Erro na requisição:', error);
+      });    
+    })
+    .catch(error => {
+      console.error('Erro na requisição:', error);
+    });
   })
   .catch(error => {
     console.error('Erro na requisição:', error);
@@ -213,6 +246,7 @@ function addPersonagem(e){
 }
 
 function removePersonagem(e){
+  getid("overblock").style.display = "flex";
   selectedId = getid("personagens").value
   fetch('/del', {
     method: 'POST',
@@ -228,9 +262,10 @@ function removePersonagem(e){
   .then(data => {
     if (data.success) {
       showBox("Personagem apagado.");
-      setTimeout(() => {
-        window.location.href = "/";
-      }, 2000)
+      personasArr = [];
+      getid("personagens").innerHTML = "";
+      clearTela();
+      window.readData();
     } else {
       console.info('Erro ao salvar dados: ' + data.error);
     }
@@ -247,6 +282,8 @@ function createSelect(e) {
     opt.textContent = personasArr[i].person.nome;
     getid("personagens").appendChild(opt)
   }
+  getid("personagens").selectedIndex = 0;
+  getid("personagens").dispatchEvent(new Event("change"), selecionaPersonagem);
 }
 
 var arrBtns = document.getElementsByClassName("icon-dice");

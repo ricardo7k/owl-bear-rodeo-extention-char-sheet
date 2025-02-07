@@ -79,7 +79,7 @@ fieldset legend {
 
 textarea {
   width: 100%;
-  height: 40px;
+  height: 100px;
 }
 
 #box_results {
@@ -388,3 +388,56 @@ select option {
   }
 }
 */
+
+.loader {
+  width: 50px;
+  height: 50px;
+  background: #3b3b3b;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+.loader::after {
+  content: '';  
+  box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  color: #FF3D0000;
+  background: currentColor;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);  /* Ajuste fino para centralização perfeita */
+  box-shadow: 
+    17px 0 0 0 #1c1c1c,      /* Direita */
+    -17px 0 0 0 #1c1c1c,     /* Esquerda */
+    8.5px -14.72px 0 0 #1c1c1c, /* Superior Direita (60 graus) */
+    -8.5px -14.72px 0 0 #1c1c1c,/* Superior Esquerda (120 graus) */
+    8.5px 14.72px 0 0 #1c1c1c, /* Inferior Direita (240 graus) */
+    -8.5px 14.72px 0 0 #1c1c1c;/* Inferior Esquerda (300 graus) */
+
+}
+#overblock {
+  position: fixed;
+  top:0;
+  left:0;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-color: #252222aa;
+  z-index: 100;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center;  
+}
+
+@keyframes rotation {
+ 0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 

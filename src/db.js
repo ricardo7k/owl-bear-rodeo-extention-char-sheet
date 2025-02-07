@@ -37,9 +37,9 @@ async function deletarPersonagem(documentId) {
     await db.collection('personagens').doc(documentId).delete();
 }
 
-async function adicionarPersonagem(userId, nome = "Novo Personagem") {
-    const docRef = await db.collection('personagens').add({ nome, userId });
-    return { id: docRef.id, nome };
+async function adicionarPersonagem(userId, nome, history) {
+    const docRef = await db.collection('personagens').add({ nome, userId, anotacoes: history });
+    return { id: docRef.id, nome: nome, anotacoes: history };
 }
 
 
