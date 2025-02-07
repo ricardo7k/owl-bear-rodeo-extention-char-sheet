@@ -13,7 +13,7 @@ try {
 } catch(e){
     console.error("ERRO PROD", e)
 }
-if(serviceAccount) {
+if(serviceAccountString) {
     if (!serviceAccountString) {
         console.error("ERRO: A variável de ambiente FIREBASE_SERVICE_ACCOUNT não está definida.");
         process.exit(1);
