@@ -9,7 +9,7 @@ const router = Router();
 
 // Configuração do Gemini
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
 
 router.get('/name', async (req, res) => {    
     try {
@@ -24,8 +24,8 @@ router.get('/name', async (req, res) => {
 
     } catch (error) {
         console.error("Erro ao gerar nome:", error);
-        res.json({ name: "Governador \"Censurino\" Brito" });
-        res.status(500).json({ error: "Erro ao gerar nome." }); // Resposta de erro mais informativa
+        res.json({ name: "Governador Censurino Brito" });
+        //res.status(500).json({ error: "Erro ao gerar nome." }); // Resposta de erro mais informativa
     }
 });
 
