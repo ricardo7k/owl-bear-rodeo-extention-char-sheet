@@ -49,7 +49,6 @@ async function readData() {
   ntimes+=1;
   if(ntimes>1) {
     ntimes=0
-    console.info(response)
     _idToken = idToken;
     const data = await response.json();
     personasArr = data.personas;
