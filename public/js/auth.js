@@ -16,7 +16,6 @@ const auth = getAuth(app);
 const firestore = getFirestore(app);
 const provider = new GoogleAuthProvider();
 
-var ntimes = 0;
 async function googleLogin() {
     try {
       const result = await signInWithPopup(auth, provider);
@@ -53,7 +52,6 @@ async function readData() {
     console.info(response)
     _idToken = idToken;
     const data = await response.json();
-    personasArr = [];
     personasArr = data.personas;
 
     getid("personagens").style.display = "block";

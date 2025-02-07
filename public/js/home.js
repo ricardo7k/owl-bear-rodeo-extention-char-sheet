@@ -194,7 +194,6 @@ function addPersonagem(e){
   .then(response => response.json())
   .then(data => {
     if (data.success) {
-      personasArr = [];
       clearTela();
       var opt = document.createElement("option")
       opt.value = data.id;

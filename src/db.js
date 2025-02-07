@@ -2,9 +2,9 @@
 // import * as admin from 'firebase-admin';
 import { createRequire } from 'module';
 
-const require = createRequire(import.meta.url); // Crie a função require
-const serviceAccount = require('./config/sak.json'); // Agora funciona!
-const admin = require('firebase-admin'); // Force o uso do require!
+const require = createRequire(import.meta.url);
+const serviceAccount = require('../config/sak.json');
+const admin = require('firebase-admin');
 
 if (admin.apps.length === 0) {
   admin.initializeApp({
@@ -13,7 +13,7 @@ if (admin.apps.length === 0) {
 }
 
 const db = admin.firestore();
-const auth = admin.auth(); // Obtenha a instância de auth
+const auth = admin.auth();
 
 // Exporte db e auth *APÓS* a inicialização
 export { db, auth };
