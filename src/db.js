@@ -9,7 +9,9 @@ var serviceAccount;
 var production = process.env.FIREBASE_SERVICE_ACCOUNT;
 
 try {
-    console.info(production);
+    console.info(">>>>", production);
+} catch(e){
+    console.error("ERRo Prod", e)
 }
 if(production) {
     serviceAccountString = process.env.FIREBASE_SERVICE_ACCOUNT;
