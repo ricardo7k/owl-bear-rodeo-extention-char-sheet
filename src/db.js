@@ -8,6 +8,9 @@ var serviceAccountString;
 var serviceAccount;
 var production = process.env.FIREBASE_SERVICE_ACCOUNT;
 
+try {
+    console.info(production);
+}
 if(production) {
     serviceAccountString = process.env.FIREBASE_SERVICE_ACCOUNT;
     if (!serviceAccountString) {
