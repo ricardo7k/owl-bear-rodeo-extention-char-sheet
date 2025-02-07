@@ -4,6 +4,7 @@
   "author": "RFO.IM",
   "icon": "/wanted.png",
   "manifest_version": 1,
+  "description": "Planilha de jogador de O Som das Seis, sem senha por enquanto.",
   "action": {
     "title": "OSdS - Character Sheet",
     "icon": "/wanted.svg",
