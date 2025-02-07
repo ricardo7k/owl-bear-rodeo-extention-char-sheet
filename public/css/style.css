@@ -84,7 +84,7 @@ textarea {
 
 #box_results {
   position: fixed;
-  background: url('textures/wood.webp');
+  background: url('/textures/wood.webp');
   width: 80vw;
   height: calc(40vw);
   left: 10%;
@@ -248,7 +248,7 @@ textarea {
 }
 
 .icon-dice, .icon-dice-equip, .icon-dice-solo {
-  background-image: url(dice-d6.png);
+  background-image: url(/img/dice-d6.png);
   background-repeat: no-repeat;
   background-size: 20px;
   width: 20px;

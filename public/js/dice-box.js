@@ -1,6 +1,6 @@
-import DiceBox from "/dice-box-threejs.es.js";
-import { showOBRNotification } from "/notificationUtils.js";
-import { createOBRNotification } from "/notificationUtils.js";
+import DiceBox from "/js/dice-box-threejs.es.js";
+import { showOBRNotification } from "/js/notificationUtils.js";
+import { createOBRNotification } from "/js/notificationUtils.js";
 
 var bonus = 0;
 var rolagem = "";
@@ -10,10 +10,10 @@ function cap(str) {
 }
 
 function rollAttr(e){
-  geid("app").style.display = "block";
+  getid("app").style.display = "block";
   var lab = e.target.id.split("roll-").join("")
-  bonus = geid(lab).value;
-  rolagem = geid("char_name").value + " - " + cap(lab);
+  bonus = getid(lab).value;
+  rolagem = getid("char_name").value + " - " + cap(lab);
   const values = [1, 2, 3, 4, 5, 6];
   const randomVal = values[Math.floor(Math.random() * values.length)];
   Box.roll(`1d6@${randomVal}`);
@@ -21,12 +21,12 @@ function rollAttr(e){
 }
 
 function rollAttrEquip(e){
-  geid("app").style.display = "block";
+  getid("app").style.display = "block";
   var lab = e.target.id.split("roll-").join("");
-  var num = geid(lab).id.split("equipamento_").join("");
-  bonus = geid(`bonus_${num}`).value;
-  var dice = geid(`dano_${num}`).value;
-  rolagem = geid("char_name").value + " - " + cap(geid(lab).value);
+  var num = getid(lab).id.split("equipamento_").join("");
+  bonus = getid(`bonus_${num}`).value;
+  var dice = getid(`dano_${num}`).value;
+  rolagem = getid("char_name").value + " - " + cap(getid(lab).value);
   const values = dice.split("d")[0].split("@")[0]==6?[1, 2, 3, 4, 5, 6]:[1, 2, 3];
   var randomVal = "";
   for(i=0;i<Number(dice.split("d")[0]);i++) {
@@ -38,11 +38,11 @@ function rollAttrEquip(e){
 }
 
 function rollAttrSolo(e){
-  geid("app").style.display = "block";
+  getid("app").style.display = "block";
   var lab = "Custom Roll"
   bonus = 0;
-  rolagem = geid("char_name").value + " - " + cap(lab);
-  var dice = geid(`char_dados`).value;
+  rolagem = getid("char_name").value + " - " + cap(lab);
+  var dice = getid(`char_dados`).value;
   const values = [1, 2, 3, 4, 5, 6];
   var randomVal = "";
   for(i=0;i<Number(dice.split("d")[0]);i++) {
@@ -54,8 +54,8 @@ function rollAttrSolo(e){
 }
 
 function clearTable(e) {
-  geid("box_results").style.display = "none";
-  geid("app").style.display = "none";
+  getid("box_results").style.display = "none";
+  getid("app").style.display = "none";
   document.getElementsByTagName("canvas")[0].removeEventListener("click", clearTable);
 }
 
@@ -81,14 +81,15 @@ const Box = new DiceBox("#app", {
     }
     total += Number(bonus)
 
-    geid("box_results_formula").innerHTML = `${forumla}`;
-    geid("box_results_result").innerHTML = `${oresultado}+(${bonus})=${total}`;
-    geid("box_results").style.display = "flex";
+    getid("box_results_formula").innerHTML = `${forumla}`;
+    getid("box_results_result").innerHTML = `${oresultado}+(${bonus})=${total}`;
+    getid("box_results").style.display = "flex";
     document.getElementsByTagName("canvas")[0].addEventListener("click", clearTable);
   },
 });
 Box.initialize();
 createOBRNotification();
+
 //Buttons
 
 var arrBtns = document.getElementsByClassName("icon-dice");
@@ -105,4 +106,4 @@ for(var i=0; i<arrBtnsEquip.length; i++) {
 }
 
 if(document.getElementsByClassName("icon-dice-solo")[0]) document.getElementsByClassName("icon-dice-solo")[0].addEventListener('click', rollAttrSolo);
-if(geid("box_results")) geid("box_results").addEventListener("click", clearTable);
+if(getid("box_results")) getid("box_results").addEventListener("click", clearTable);

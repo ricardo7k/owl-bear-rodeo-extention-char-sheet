@@ -17,16 +17,6 @@ export function createOBRNotification() {
             anchorOrigin: { horizontal: "RIGHT", vertical: "BOTTOM" }
           });
         });
-        // console.info(`${m}#__${Math.random()}`, rolagem, bonus);
-        // OBR.scene.setMetadata(
-        //   {
-        //    "im.rfo/sheet": { 
-        //       roll: `${m}#__${Math.random()}`,
-        //       rolagem: rolagem,
-        //       bonus: bonus
-        //     } 
-        //   }
-        // )
       } else {
         console.info("SCENE NOK")
       }

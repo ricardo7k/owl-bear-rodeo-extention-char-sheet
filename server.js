@@ -1,68 +1,16 @@
-const express = require("express");
-const cors = require('cors');
+// server.js
+import express from 'express';
+import cors from 'cors';
+import router from './routes.js';  // Importa as rotas
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url); //Para usar o __dirname
+const __dirname = path.dirname(__filename);
+
 const app = express();
 
-
-
-app.use(express.json());
-
-const admin = require('firebase-admin');
-const serviceAccount = require('./nova-key.json'); 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});
-const db = admin.firestore();
-
-async function listarPersonagens(req, res, _html) {
-  var arrPersonas = []
-  try {
-    const personagensRef = db.collection('personagens');
-    const snapshot = await personagensRef.get();
-    snapshot.forEach(doc => {
-      arrPersonas.push({id:doc.id,person:doc.data()});
-    });
-    res.render(_html, {personas:arrPersonas});
-  } catch (error) {
-    console.error('Erro ao listar personagens:', error);
-  }
-}
-
-app.post('/salvar', (req, res) => {
-  const documentId = req.body.documentId;
-  const dados = req.body.dados;
-
-  db.collection('personagens').doc(documentId).set(dados)
-    .then(() => {
-      res.json({ success: true, id:documentId });
-    })
-    .catch(error => {
-      res.status(500).json({ success: false, error: error.message }); // Envia uma resposta JSON de erro
-    });
-});
-
-app.post('/del', (req, res) => {
-  const documentId = req.body.documentId;
-
-  db.collection('personagens').doc(documentId).delete()
-    .then(() => {
-      res.json({ success: true }); // Envia uma resposta JSON de sucesso
-    })
-    .catch(error => {
-      res.status(500).json({ success: false, error: error.message }); // Envia uma resposta JSON de erro
-    });
-});
-
-app.post('/add', (req, res) => {
-  const nome = "Novo Personagem"
-  db.collection('personagens').add({nome:nome})
-  .then((doc) => {
-      res.json({ success: true, id: doc.id, nome: nome });
-    })
-    .catch(error => {
-      res.status(500).json({ success: false, error: error.message }); // Envia uma resposta JSON de erro
-    });
-});
-
+// Middleware
 app.use(function(req, res, next){
     res.header('Access-Control-Allow-Private-Network', 'true');
     res.header('Access-Control-Allow-Origin', 'https://www.owlbear.rodeo');
@@ -76,21 +24,24 @@ app.use(function(req, res, next){
     else next();
 });
 
+app.use(express.json());
 app.set('view engine', 'ejs');
 
+// Rotas da API (usando o router)
+app.use(router);
+
+// Rotas estáticas e de templates (se você estiver usando)
 app.get("/", (req, res) => {
-  listarPersonagens(req, res, 'pages/index')
+    res.render('pages/index', { personas: [] });
 });
 
 app.get("/pop/:key", (req, res) => {
-  res.render('pages/pop', { 
-    key:req.params.key
-  });
+    res.render('pages/pop', { key: req.params.key });
 });
 
-app.use(express.static(__dirname+"/public"));
+app.use(express.static(path.join(__dirname, "public")));
 
-
-app.listen(8080, () => {
-  console.log("Running 8080");
+const PORT = process.env.PORT || 8080;  // Use a porta do ambiente ou 8080
+app.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
 });

@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/wanted.svg" />
-    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="/img/wanted.svg" />
+    <link rel="stylesheet" href="/css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OSdS</title>
   </head>
@@ -11,12 +11,18 @@
     <div class="content">
       <div class="ui-line box-salvar">
         <fieldset class="char-box">
-          <div class="atributo">
-            <select id="personagens">
+          <div id="data-container">
+              <div id="data"></div>
+          </div>
+          <div class="atributo" id="seleciona">
+            <select id="personagens" style="display:none">
               <option value="---">Selecione o Jogador</option>
             </select>
-            <input type="button" id="add" name="add" value="+">
-            <input type="button" id="remove" name="remove" value="-">
+            <input type="button" id="add" name="add" value="+" style="display:none">
+            <input type="button" id="remove" name="remove" value="-" style="display:none">
+            <div id="login-container">
+                <button id="google-login-button">Login</button>
+            </div>
           </div>
         </fieldset>
       </div>
@@ -194,127 +200,6 @@
               <legend>Roll</legend>
             </div>
           </div>
-          <div class="content-box"> 
-            <div class="name-box">
-              <input type="text" name="equipamento_1" id="equipamento_1" value="">
-            </div>
-            <div class="level-box">
-                <input type="text" id="dano_1" name="dano_1" value="">
-            </div>
-            <div class="level-box">
-              <input type="number" id="bonus_1" name="bonus_1" value="">
-            </div>
-            <span id="roll-equipamento_1" class="icon-dice-equip"></span>
-          </div>
-          <div class="content-box"> 
-            <div class="name-box">
-              <input type="text" name="equipamento_2" id="equipamento_2" value="">
-            </div>
-            <div class="level-box">
-              <input type="text" id="dano_2" name="dano_2" value="">
-            </div>
-            <div class="level-box">
-              <input type="number" id="bonus_2" name="bonus_2" value="">
-            </div>
-            <span id="roll-equipamento_2" class="icon-dice-equip"></span>
-          </div>
-          <div class="content-box"> 
-            <div class="name-box">
-              <input type="text" name="equipamento_3" id="equipamento_3" value="">
-            </div>
-            <div class="level-box">
-              <input type="text" id="dano_3" name="dano_3" value="">
-            </div>
-            <div class="level-box">
-              <input type="number" id="bonus_3" name="bonus_3" value="">
-            </div>
-            <span id="roll-equipamento_3" class="icon-dice-equip"></span>
-          </div>
-          <div class="content-box"> 
-            <div class="name-box">
-              <input type="text" name="equipamento_4" id="equipamento_4" value="">
-            </div>
-            <div class="level-box">
-              <input type="text" id="dano_4" name="dano_4" value="">
-            </div>
-            <div class="level-box">
-              <input type="number" id="bonus_4" name="bonus_4" value="">
-            </div>
-            <span id="roll-equipamento_4" class="icon-dice-equip"></span>
-          </div>
-          <div class="content-box"> 
-            <div class="name-box">
-              <input type="text" name="equipamento_5" id="equipamento_5" value="">
-            </div>
-            <div class="level-box">
-              <input type="text" id="dano_5" name="dano_5" value="">
-            </div>
-            <div class="level-box">
-              <input type="number" id="bonus_5" name="bonus_5" value="">
-            </div>
-            <span id="roll-equipamento_5" class="icon-dice-equip"></span>
-          </div>
-          <div class="content-box"> 
-            <div class="name-box">
-              <input type="text" name="equipamento_6" id="equipamento_6" value="">
-            </div>
-            <div class="level-box">
-              <input type="text" id="dano_6" name="dano_6" value="">
-            </div>
-            <div class="level-box">
-              <input type="number" id="bonus_6" name="bonus_6" value="">
-            </div>
-            <span id="roll-equipamento_6" class="icon-dice-equip"></span>
-          </div>
-          <div class="content-box"> 
-            <div class="name-box">
-              <input type="text" name="equipamento_7" id="equipamento_7" value="">
-            </div>
-            <div class="level-box">
-              <input type="text" id="dano_7" name="dano_7" value="">
-            </div>
-            <div class="level-box">
-              <input type="number" id="bonus_7" name="bonus_7" value="">
-            </div>
-            <span id="roll-equipamento_7" class="icon-dice-equip"></span>
-          </div>
-          <div class="content-box"> 
-            <div class="name-box">
-              <input type="text" name="equipamento_8" id="equipamento_8" value="">
-            </div>
-            <div class="level-box">
-              <input type="text" id="dano_8" name="dano_8" value="">
-            </div>
-            <div class="level-box">
-              <input type="number" id="bonus_8" name="bonus_8" value="">
-            </div>
-            <span id="roll-equipamento_8" class="icon-dice-equip"></span>
-          </div>
-          <div class="content-box"> 
-            <div class="name-box">
-              <input type="text" name="equipamento_9" id="equipamento_9" value="">
-            </div>
-            <div class="level-box">
-              <input type="text" id="dano_9" name="dano_9" value="">
-            </div>
-            <div class="level-box">
-              <input type="number" id="bonus_9" name="bonus_9" value="">
-            </div>
-
-            <span id="roll-equipamento_9" class="icon-dice-equip"></span>
-          </div>
-          <div class="content-box"> 
-            <div class="name-box">
-              <input type="text" name="equipamento_10" id="equipamento_10" value="">
-            </div>
-            <div class="level-box">
-              <input type="text" id="dano_10" name="dano_10" value="">
-            </div>
-            <div class="level-box">
-              <input type="number" id="bonus_10" name="bonus_10" value="">
-            </div>
-            <span id="roll-equipamento_10" class="icon-dice-equip"></span>
-          </div>
         </fieldset>
       </div>
       <div class="ui-line">
@@ -342,8 +227,14 @@
         </fieldset>
       </div> 
     </div>
-    <script type="text/javascript">var personasArr = <%- JSON.stringify(personas) %>;</script>
-    <script type="module" src="/dice-box.js"></script>
-    <script type="text/javascript" src="home.js"></script>
+    <script type="text/javascript">
+      var personasArr = [];
+      var oid = null;
+      var _idToken = null;
+    </script>
+    <script type="module" src="/js/auth.js"></script>
+    <script type="module" src="/js/dice-box.js"></script>
+    <script type="text/javascript" src="/js/home.js"></script>
+    <script type="text/javascript" src="/js/equipamento.js"></script>
   </body>
 </html>

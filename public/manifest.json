@@ -2,12 +2,12 @@
   "name": "O Som das Seis - Character Sheet",
   "version": "1.0.0",
   "author": "RFO.IM",
-  "icon": "/wanted.png",
+  "icon": "/img/wanted.png",
   "manifest_version": 1,
   "description": "Planilha de jogador de O Som das Seis, sem senha por enquanto.",
   "action": {
     "title": "OSdS - Character Sheet",
-    "icon": "/wanted.svg",
+    "icon": "/img/wanted.svg",
     "popover": "/",
     "height": 800,
     "width": 420
