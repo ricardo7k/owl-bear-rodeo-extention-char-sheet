@@ -1,5 +1,4 @@
 // db.js
-// import * as admin from 'firebase-admin';
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const admin = require('firebase-admin');
@@ -7,18 +6,7 @@ const admin = require('firebase-admin');
 var serviceAccount;
 var serviceAccountString = process.env.FIREBASE_SERVICE_ACCOUNT;
 
-
-try {
-    console.info(">>>>", serviceAccount);
-} catch(e){
-    console.error("ERRO PROD", e)
-}
 if(serviceAccountString) {
-    if (!serviceAccountString) {
-        console.error("ERRO: A variável de ambiente FIREBASE_SERVICE_ACCOUNT não está definida.");
-        process.exit(1);
-    }
-    console.info("TEM serviceAccountString")
     try {
         serviceAccount = JSON.parse(serviceAccountString);
     } catch (error) {
@@ -26,9 +14,9 @@ if(serviceAccountString) {
         process.exit(1);
     }
 } else {
+    console.error("ERRO: A variável de ambiente FIREBASE_SERVICE_ACCOUNT não está definida.");
     serviceAccount = require('../config/sak.json')
 }
-console.info("Passou")
 
 if (admin.apps.length === 0) {
   admin.initializeApp({
