@@ -16,10 +16,11 @@ const auth = getAuth(app);
 const firestore = getFirestore(app);
 const provider = new GoogleAuthProvider();
 
+var ntimes = 0;
 async function googleLogin() {
     try {
-        const result = await signInWithPopup(auth, provider);
-        const user = result.user;
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
       readData();
     } catch (error) {
         alert("Erro ao fazer login: " + error.message);
@@ -45,16 +46,22 @@ async function readData() {
   if (!response.ok) {
     const errorText = await response.text();
     throw new Error(`Erro ao ler dados do servidor: ${response.status} - ${errorText}`);
-  }
-  _idToken = idToken;
-  const data = await response.json();
-  personasArr = data.personas;
+  } 
+  ntimes+=1;
+  if(ntimes>1) {
+    ntimes=0
+    console.info(response)
+    _idToken = idToken;
+    const data = await response.json();
+    personasArr = [];
+    personasArr = data.personas;
 
-  getid("personagens").style.display = "block";
-  getid("add").style.display = "block";
-  getid("remove").style.display = "block";
-  getid("login-container").style.display = "none";
-  createSelect();
+    getid("personagens").style.display = "block";
+    getid("add").style.display = "block";
+    getid("remove").style.display = "block";
+    getid("login-container").style.display = "none";
+    createSelect();
+  }
 }
 
 getid('google-login-button').addEventListener('click', googleLogin);
