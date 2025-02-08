@@ -1,5 +1,4 @@
 import DiceBox from "/js/dice-box-threejs.es.js";
-import { showOBRNotification } from "/js/notificationUtils.js";
 
 var bonus = 0;
 var rolagem = "";
@@ -32,9 +31,9 @@ function rollAttr(e){
   bonus = getid(lab).value;
   rolagem = getid("char_name").value + " - " + cap(lab);
   randomNum(1,6).then((data)=>{
+    window.showOBRNotification(`1d6@${data}`, rolagem, bonus);
     Box.roll(`1d6@${data}`);
     getid("app").style.display = "block";
-    showOBRNotification(`1d6@${data}`, rolagem, bonus);
   });
 }
 
@@ -46,9 +45,9 @@ function rollAttrEquip(e){
   rolagem = getid("char_name").value + " - " + cap(getid(lab).value);
   var a = dice.split("d");
   randomNum(a[0],a[1]).then((data)=>{
+    window.showOBRNotification(`${dice}@${data}`, rolagem, bonus);
     Box.roll(`${dice}@${data}`);
     getid("app").style.display = "block";
-    showOBRNotification(`${dice}@${data}`, rolagem, bonus);
   });
 }
 
@@ -58,9 +57,9 @@ function rollAttrSolo(e){
   rolagem = getid("char_name").value + " - " + cap(lab);
   var dice = getid(`char_dados`).value;
   randomNum(dice,"6").then((data)=>{
+    window.showOBRNotification(`${dice}d6@${data}`, rolagem, bonus);
     Box.roll(`${dice}d6@${data}`);
     getid("app").style.display = "block";
-    showOBRNotification(`${dice}d6@${data}`, rolagem, bonus);
   });
 }
 
@@ -71,6 +70,23 @@ function clearTable(e) {
 }
 
 function initDice() {
+  console.info("============> initDice");
+  //Buttons
+  var arrBtns = document.getElementsByClassName("icon-dice");
+  for(var i=0; i<arrBtns.length; i++) {
+    var bt = arrBtns[i];
+    bt.addEventListener('click', rollAttr);
+  }
+
+  var arrBtnsEquip = document.getElementsByClassName("icon-dice-equip");
+
+  for(var i=0; i<arrBtnsEquip.length; i++) {
+    var bt = arrBtnsEquip[i];
+    bt.addEventListener('click', rollAttrEquip);
+  }
+  if(document.getElementsByClassName("icon-dice-solo")[0]) document.getElementsByClassName("icon-dice-solo")[0].addEventListener('click', rollAttrSolo);
+  if(getid("box_results")) getid("box_results").addEventListener("click", clearTable);
+
   Box = new DiceBox("#app", {
     theme_customColorset: {
       background: "#5C4033",
@@ -99,26 +115,12 @@ function initDice() {
       document.getElementsByTagName("canvas")[0].addEventListener("click", clearTable);
     },
   });
+  console.info("============> Try Box Intialization");
   Box.initialize().then((e) => { 
     getid("app").style.display = "none";
     getid("app").style.position = "fixed";
+    console.info("============> Box Intialized");
   });
 }
 
-//Buttons
-var arrBtns = document.getElementsByClassName("icon-dice");
-for(var i=0; i<arrBtns.length; i++) {
-  var bt = arrBtns[i];
-  bt.addEventListener('click', rollAttr);
-}
-
-var arrBtnsEquip = document.getElementsByClassName("icon-dice-equip");
-
-for(var i=0; i<arrBtnsEquip.length; i++) {
-  var bt = arrBtnsEquip[i];
-  bt.addEventListener('click', rollAttrEquip);
-}
-if(document.getElementsByClassName("icon-dice-solo")[0]) document.getElementsByClassName("icon-dice-solo")[0].addEventListener('click', rollAttrSolo);
-if(getid("box_results")) getid("box_results").addEventListener("click", clearTable);
-
-initDice();
+window.initDice = initDice;

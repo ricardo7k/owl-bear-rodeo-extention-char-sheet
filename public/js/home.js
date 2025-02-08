@@ -8,9 +8,11 @@ function atualizarValor(sliderId, valorId) {
 function getid(id) {
  return document.querySelector("#" + id);
 }
+
 function getclass(id) {
  return document.getElementsByClassName(id);
 }
+
 function getobj(id) {
  return document.getElementsByTagName(id);
 }
@@ -52,7 +54,6 @@ function clearTela() {
 }
 
 function updateTela(person) {
-
     getid("char_name").value = person.nome || "";
 
     getid("char_level").value = person.nivel || "";
@@ -91,7 +92,6 @@ function updateTela(person) {
       getid(`bonus_${p}`).value = person.equipamentos[i].bonus || "";
     }
     getid("reputacaoValor").textContent = getid("reputacao").value = person.reputacao || "";
-
 }
 
 function selecionaPersonagem(e) {
@@ -246,6 +246,7 @@ function addPersonagem(e){
 
 function removePersonagem(e){
   getid("overblock").style.display = "flex";
+  window.OWLCSCreatedSelect = false;
   selectedId = getid("personagens").value
   fetch('/del', {
     method: 'POST',
@@ -274,7 +275,8 @@ function removePersonagem(e){
   });
 }
 
-function createSelect(e) {
+function createSelect(pagina) {
+  console.info("============> createSelect");
   getid("personagens").textContent = "";
   for(i in personasArr) {
     var opt = document.createElement("option")
@@ -284,19 +286,28 @@ function createSelect(e) {
   }
   getid("personagens").selectedIndex = 0;
   getid("personagens").dispatchEvent(new Event("change"), selecionaPersonagem);
+  console.info(`============> createSelect try pagina HOME? (${pagina=="HOME"} && OWLCSHomeStarted? ${window.OWLCSHomeStarted}`);
+  console.info("============> createSelect Done");
+  window.OWLCSCreatedSelect = true;
+  if(pagina=="HOME" && !window.OWLCSHomeStarted) startHome();
+  console.info("============> Try create window.initDice ");
+  window.initDice();
 }
 
-var arrBtns = document.getElementsByClassName("icon-dice");
-for(var i=0; i<arrBtns.length; i++) {
-  var bt = arrBtns[i];
-  var lab = bt.id.split("roll-").join("");
-  getid(lab).addEventListener('input', (e) => atualizarValor(e.target.id.split("roll-").join(""), `${e.target.id.split("roll-").join("")}Valor`));
-}
-
-window.onload = function(){ 
-  getid("app").style.display = "none";
+function startHome() {
+  window.OWLCSHomeStarted = true;
+  console.info("============> Home startHome");
+  var arrBtns = document.getElementsByClassName("icon-dice");
+  for(var i=0; i<arrBtns.length; i++) {
+    var bt = arrBtns[i];
+    var lab = bt.id.split("roll-").join("");
+    getid(lab).addEventListener('input', (e) => atualizarValor(e.target.id.split("roll-").join(""), `${e.target.id.split("roll-").join("")}Valor`));
+  }
+  // getid("app").style.display = "none";
   getid("personagens").addEventListener('change', selecionaPersonagem);
   getid("remove").addEventListener('click', removePersonagem);
   getid("add").addEventListener('click', addPersonagem);
   getid("salvar").addEventListener('click', salvarPersonagem);
+  console.info("============> Try startEquipamento");
+  startEquipamento();
 }
