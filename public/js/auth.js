@@ -36,6 +36,7 @@ async function logout() {
 
 export async function readData() {
   const idToken = await auth.currentUser.getIdToken();
+  console.info(idToken);
   const response = await fetch('/list', {
       method: 'GET',
       headers: {
