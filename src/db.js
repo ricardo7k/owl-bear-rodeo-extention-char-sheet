@@ -1,23 +1,23 @@
 // db.js
 import { createRequire } from 'module';
+import 'dotenv/config'; // Carrega as variáveis de ambiente do .env
 const require = createRequire(import.meta.url);
 const admin = require('firebase-admin');
 
-var serviceAccount;
-var serviceAccountString = process.env.FIREBASE_SERVICE_ACCOUNT;
+var FIREBASE_SERVICE_ACCOUNT = process.env.FIREBASE_SERVICE_ACCOUNT;
 
-console.info("serviceAccountString", serviceAccountString);
+var serviceAccount;
+var serviceAccountString = FIREBASE_SERVICE_ACCOUNT;
+
 if(serviceAccountString) {
     try {
         serviceAccount = JSON.parse(serviceAccountString);
-        console.info("serviceAccount", serviceAccount);
     } catch (error) {
         console.error("ERRO: A variável de ambiente FIREBASE_SERVICE_ACCOUNT não é um JSON válido.", error);
         process.exit(1);
     }
 } else {
     console.error("ERRO: A variável de ambiente FIREBASE_SERVICE_ACCOUNT não está definida.");
-    serviceAccount = require('../.config/sak.json')
 }
 
 if (admin.apps.length === 0) {
@@ -34,11 +34,15 @@ export { db, auth };
 
 // Funções para interagir com o Firestore (CRUD) - Mantenha como antes
 async function getPersonagens(userId) {
-    const querySnapshot = await db.collection('personagens').where('userId', '==', userId).get();
-    const data = [];
-    querySnapshot.forEach((doc) => {
-        data.push({ id: doc.id, person: doc.data() });
-    });
+    var data = [];
+    try {
+        const querySnapshot = await db.collection('personagens').where('userId', '==', userId).get();
+        querySnapshot.forEach((doc) => {
+            data.push({ id: doc.id, person: doc.data() });
+        });
+    } catch(e) {
+        data = ["erro"];
+    }
     return data;
 }
 

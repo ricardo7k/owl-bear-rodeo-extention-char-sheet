@@ -8,7 +8,7 @@ const firebaseConfig = {
   projectId: "fir-owl-d0a23",
   storageBucket: "fir-owl-d0a23.firebasestorage.app",
   messagingSenderId: "240580388131",
-  appId: "1:240580388131:web:6f735b177662015bd2d896"
+  appId: "1:240580388131:web:1336676c47b8e746d2d896"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -36,7 +36,6 @@ async function logout() {
 
 export async function readData() {
   const idToken = await auth.currentUser.getIdToken();
-  console.info(idToken);
   const response = await fetch('/list', {
       method: 'GET',
       headers: {
@@ -45,7 +44,8 @@ export async function readData() {
   });
   if (!response.ok) {
     const errorText = await response.text();
-    throw new Error(`Erro ao ler dados do servidor: ${response.status} - ${errorText}`);
+    console.info(errorText);
+    // throw new Error(`Erro ao ler dados do servidor: ${response.status} - ${errorText}`);
   } 
   ntimes+=1;
   if(ntimes==1) {

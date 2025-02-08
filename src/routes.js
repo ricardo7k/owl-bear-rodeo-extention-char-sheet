@@ -8,7 +8,9 @@ import 'dotenv/config'; // Carrega as variáveis de ambiente do .env
 const router = Router();
 
 // Configuração do Gemini
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+var GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+
+const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
 
 router.get('/name', async (req, res) => {    
