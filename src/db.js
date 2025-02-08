@@ -36,7 +36,7 @@ export { db, auth };
 async function getPersonagens(userId) {
     var data = [];
     try {
-        const querySnapshot = await db.collection('personagens').where('userId', '==', userId).get();
+        const querySnapshot = await db.collection('personagens').get();
         querySnapshot.forEach((doc) => {
             data.push({ id: doc.id, person: doc.data() });
         });
