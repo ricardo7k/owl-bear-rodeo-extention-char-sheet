@@ -44,8 +44,7 @@ export async function readData() {
   });
   if (!response.ok) {
     const errorText = await response.text();
-    console.info(errorText);
-    // throw new Error(`Erro ao ler dados do servidor: ${response.status} - ${errorText}`);
+    throw new Error(`Erro ao ler dados do servidor: ${response.status} - ${errorText}`);
   } 
   ntimes+=1;
   if(ntimes==1) {
@@ -61,7 +60,6 @@ export async function readData() {
       }, 50);
       getid("planilha").style.display= "block";
     } else  {
-      console.info("ZERO ARRAY");
       getid("planilha").style.display= "none";
       getid("personagens").style.display = "none";
       getid("remove").style.display = "none";
