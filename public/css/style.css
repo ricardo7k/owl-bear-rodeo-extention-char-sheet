@@ -360,7 +360,7 @@ textarea {
   /* Outros estilos que você já tem para o char-box */
   padding: 20px; /* Exemplo de padding */
   border: 1px solid #ccc; /* Exemplo de borda */
-  border-radius: 8px; /* Arredonda os cantos do fieldset */
+  border-radius: 16px; /* Arredonda os cantos do fieldset */
   width: 100vw;
 }
 
