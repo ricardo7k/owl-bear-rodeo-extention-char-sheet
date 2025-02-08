@@ -200,6 +200,7 @@ textarea {
   display: flex; 
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .support-box fieldset {
@@ -252,11 +253,18 @@ textarea {
   background-image: url(/img/dice-d6.png);
   background-repeat: no-repeat;
   background-size: 20px;
-  width: 20px;
+  min-width: 20px;
   height: 20px;
   display: inline-block;
   filter: invert(51%) sepia(91%) saturate(223%) hue-rotate(162deg) brightness(95%) contrast(102%);
   cursor: pointer; 
+  animation: filter 0.5s linear infinite;
+
+}
+.icon-dice:hover, 
+.icon-dice-equip:hover,
+.icon-dice-solo:hover {
+  filter: invert(51%) sepia(91%) saturate(223%) hue-rotate(62deg) brightness(95%) contrast(102%);
 }
 
 #fisicoValor,
@@ -289,7 +297,11 @@ textarea {
   display: flex;
   top: 10px;
   position: relative;
+  margin-left: 5px;
+}
 
+#seleciona {
+  flex-wrap: wrap;
 }
 
 #salvar, #add, #remove {
@@ -359,6 +371,7 @@ select {
   cursor: pointer;
   transition: border-color 0.3s ease;
   margin: 0 10px 0 0;
+  margin-bottom: 5px;
 }
 
 select:hover {
