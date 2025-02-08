@@ -80,7 +80,7 @@ button:focus-visible {
 }
 
 fieldset {
-  border-radius: 10px 10px 0 0;
+  border-radius: 16px 16px 0 0;
   box-sizing: border-box;
   border-color: #213547;
   margin: 5px;
@@ -121,7 +121,7 @@ textarea {
   color: #FFCC00;
   backdrop-filter: invert(26%) sepia(25%) saturate(705%) hue-rotate(335deg) brightness(15%) contrast(90%);
   border: 0;
-  border-radius: 10px 10px 0 0;
+  border-radius: 16px 16px 0 0;
   display: flex;
   width: 100%;
   margin: 0;
