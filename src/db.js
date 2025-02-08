@@ -6,9 +6,11 @@ const admin = require('firebase-admin');
 var serviceAccount;
 var serviceAccountString = process.env.FIREBASE_SERVICE_ACCOUNT;
 
+console.info("serviceAccountString", serviceAccountString);
 if(serviceAccountString) {
     try {
         serviceAccount = JSON.parse(serviceAccountString);
+        console.info("serviceAccount", serviceAccount);
     } catch (error) {
         console.error("ERRO: A variável de ambiente FIREBASE_SERVICE_ACCOUNT não é um JSON válido.", error);
         process.exit(1);
