@@ -110,6 +110,7 @@ textarea {
   bottom: -100%;
   box-shadow: 1px -15px 40px #00000077;
   animation: appear 1s ease forwards;
+  z-index: 2;
 }
 
 @keyframes appear {
