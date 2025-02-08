@@ -15,7 +15,7 @@ if(serviceAccountString) {
     }
 } else {
     console.error("ERRO: A variável de ambiente FIREBASE_SERVICE_ACCOUNT não está definida.");
-    serviceAccount = require('../config/sak.json')
+    serviceAccount = require('../.config/sak.json')
 }
 
 if (admin.apps.length === 0) {

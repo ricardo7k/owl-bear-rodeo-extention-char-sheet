@@ -4,6 +4,7 @@ import { createOBRNotification } from "/js/notificationUtils.js";
 
 var bonus = 0;
 var rolagem = "";
+var Box = {};
 
 function cap(str) {
   return str.charAt(0).toUpperCase() + str.slice(1); 
@@ -17,7 +18,7 @@ function rollAttr(e){
   const values = [1, 2, 3, 4, 5, 6];
   const randomVal = values[Math.floor(Math.random() * values.length)];
   Box.roll(`1d6@${randomVal}`);
-  showOBRNotification(`1d6@${randomVal}`, rolagem, bonus);
+  //showOBRNotification(`1d6@${randomVal}`, rolagem, bonus);
 }
 
 function rollAttrEquip(e){
@@ -59,39 +60,44 @@ function clearTable(e) {
   document.getElementsByTagName("canvas")[0].removeEventListener("click", clearTable);
 }
 
-const Box = new DiceBox("#app", {
-  theme_customColorset: {
-    background: "#5C4033",
-    foreground: "#FFCC00",
-    texture: "wood",
-    material: "wood",
-  },
-  light_intensity: 1,
-  gravity_multiplier: 600,
-  baseScale: 100,
-  strength: 1,
-  onRollComplete: (results) => {
-    var forumla = `<p><span>${rolagem} | ${results.notation.split("@")[0]}+(${bonus}) :</span></p>`
-    var oresultado = "";
-    var total = 0;
-    for(var i=0;i<results.result.length; i++){
-      var dist = i==results.result.length-1?"":"+";
-      oresultado += `${results.result[i]}${dist}`;
-      total += Number(results.result[i]);
-    }
-    total += Number(bonus)
+function initDice() {
+  Box = new DiceBox("#app", {
+    theme_customColorset: {
+      background: "#5C4033",
+      foreground: "#FFCC00",
+      texture: "wood",
+      material: "wood",
+    },
+    light_intensity: 1,
+    gravity_multiplier: 600,
+    baseScale: 100,
+    strength: 1,
+    onRollComplete: (results) => {
+      var forumla = `<p><span>${rolagem} | ${results.notation.split("@")[0]}+(${bonus}) :</span></p>`
+      var oresultado = "";
+      var total = 0;
+      for(var i=0;i<results.result.length; i++){
+        var dist = i==results.result.length-1?"":"+";
+        oresultado += `${results.result[i]}${dist}`;
+        total += Number(results.result[i]);
+      }
+      total += Number(bonus)
 
-    getid("box_results_formula").innerHTML = `${forumla}`;
-    getid("box_results_result").innerHTML = `${oresultado}+(${bonus})=${total}`;
-    getid("box_results").style.display = "flex";
-    document.getElementsByTagName("canvas")[0].addEventListener("click", clearTable);
-  },
-});
-Box.initialize();
+      getid("box_results_formula").innerHTML = `${forumla}`;
+      getid("box_results_result").innerHTML = `${oresultado}+(${bonus})=${total}`;
+      getid("box_results").style.display = "flex";
+      document.getElementsByTagName("canvas")[0].addEventListener("click", clearTable);
+    },
+  });
+  Box.initialize().then((e) => { 
+    // Box.roll("2d6@1,2")
+    getid("app").style.display = "none";
+    getid("app").style.position = "fixed";
+  });
+}
+
 createOBRNotification();
-
 //Buttons
-
 var arrBtns = document.getElementsByClassName("icon-dice");
 for(var i=0; i<arrBtns.length; i++) {
   var bt = arrBtns[i];
@@ -104,6 +110,7 @@ for(var i=0; i<arrBtnsEquip.length; i++) {
   var bt = arrBtnsEquip[i];
   bt.addEventListener('click', rollAttrEquip);
 }
-
 if(document.getElementsByClassName("icon-dice-solo")[0]) document.getElementsByClassName("icon-dice-solo")[0].addEventListener('click', rollAttrSolo);
 if(getid("box_results")) getid("box_results").addEventListener("click", clearTable);
+
+initDice();
