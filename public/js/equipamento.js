@@ -43,16 +43,3 @@ for(var i = 1; i<nequip+1; i++) {
 
   getclass("equip-box")[0].appendChild(content);
 }
-
-          // <div class="content-box"> 
-          //   <div class="name-box">
-          //     <input type="text" name="equipamento_1" id="equipamento_1" value="">
-          //   </div>
-          //   <div class="level-box">
-          //       <input type="text" id="dano_1" name="dano_1" value="">
-          //   </div>
-          //   <div class="level-box">
-          //     <input type="number" id="bonus_1" name="bonus_1" value="">
-          //   </div>
-          //   <span id="roll-equipamento_1" class="icon-dice-equip"></span>
-          // </div>

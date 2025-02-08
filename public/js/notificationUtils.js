@@ -23,6 +23,7 @@ export function createOBRNotification() {
     })
   })
 }
+createOBRNotification()
 
 export function showOBRNotification(m, _rolagem, _bonus) {
   rolagem = _rolagem;
