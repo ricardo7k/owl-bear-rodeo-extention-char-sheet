@@ -303,7 +303,6 @@ function startHome() {
     var lab = bt.id.split("roll-").join("");
     getid(lab).addEventListener('input', (e) => atualizarValor(e.target.id.split("roll-").join(""), `${e.target.id.split("roll-").join("")}Valor`));
   }
-  // getid("app").style.display = "none";
   getid("personagens").addEventListener('change', selecionaPersonagem);
   getid("remove").addEventListener('click', removePersonagem);
   getid("add").addEventListener('click', addPersonagem);
