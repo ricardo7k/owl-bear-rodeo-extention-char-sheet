@@ -22,26 +22,24 @@
         import DiceBox from "/js/dice-box-threejs.es.js";
         var rolagem = "";
         var bonus = "";
-
-        OBR.onReady(async () => {
-            OBR.scene.onMetadataChange((metadata) => {
-                var sheet = metadata["im.rfo/sheet"];
-                rolagem = sheet.rolagem;
-                bonus = sheet.bonus;
-                Box.roll(sheet.roll.split("#")[0])
-            })
-            OBR.scene.setMetadata(
-              {
-               "im.rfo/muda": { 
-                  muda: `muda`
-                } 
-              }
-            )
-        })
+        var roll = {};
+        var sheet = {};
 
         function geid(id) {
             return document.querySelector("#" + id);
         }
+
+        OBR.onReady(async () => {
+            sheet = await OBR.scene.getMetadata();
+            var obj = sheet["im.rfo/sheet"]
+            if(obj) {
+                rolagem = obj.rolagem;
+                bonus = obj.bonus;
+                roll = obj.roll.split("#")[0];
+                Box.roll(roll);
+            }
+        })
+
         const Box = new DiceBox("#app", {
             theme_customColorset: {
                 background: "#5C4033",
@@ -50,9 +48,9 @@
                 material: "wood",
             },
             light_intensity: 1,
-            gravity_multiplier: 600,
+            gravity_multiplier: 400,
             baseScale: 100,
-            strength: 2,
+            strength: 1,
             onRollComplete: (results) => {
                 var forumla = `<p><span>${rolagem} | ${results.notation.split("@")[0]}+(${bonus}) :</span></p>`
                 var oresultado = "";

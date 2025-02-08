@@ -15,6 +15,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const firestore = getFirestore(app);
 const provider = new GoogleAuthProvider();
+var ntimes = 0;
 
 async function googleLogin() {
     try {
@@ -35,40 +36,40 @@ async function logout() {
 }
 
 export async function readData() {
+  personasArr = [];
   const idToken = await auth.currentUser.getIdToken();
-  const response = await fetch('/list', {
-      method: 'GET',
-      headers: {
-          'Authorization': `Bearer ${idToken}`
-      }
-  });
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`Erro ao ler dados do servidor: ${response.status} - ${errorText}`);
-  } 
-  ntimes+=1;
-  if(ntimes==1) {
-    ntimes=0
-    _idToken = idToken;
-    const data = await response.json();
-    personasArr = data.personas;
-    if(personasArr.length>0) {
-      getid("personagens").style.display = "block";
-      getid("personagens").selectedIndex = 0;
-      setTimeout(()=>{
-        getid("personagens").dispatchEvent(new Event("change"), selecionaPersonagem);
-      }, 50);
-      getid("planilha").style.display= "block";
-    } else  {
-      getid("planilha").style.display= "none";
-      getid("personagens").style.display = "none";
-      getid("remove").style.display = "none";
+  fetch('/list', {
+    method: 'GET',
+    headers: {
+        'Authorization': `Bearer ${idToken}`
     }
-    getid("add").style.display = "block";
-    getid("login-container").style.display = "none";
-    createSelect();
-  }
-  getid("overblock").style.display = "none";
+  })
+  .then(response => response.json())
+  .then(data => {
+    ntimes+=1;
+    if(ntimes==1) {
+      personasArr = [];
+      ntimes=0
+      _idToken = idToken;
+      personasArr = data.personas;
+      if(personasArr.length>0) {
+        getid("personagens").style.display = "block";
+        getid("personagens").selectedIndex = 0;
+        setTimeout(()=>{
+          getid("personagens").dispatchEvent(new Event("change"), selecionaPersonagem);
+        }, 50);
+        getid("planilha").style.display= "block";
+      } else  {
+        getid("planilha").style.display= "none";
+        getid("personagens").style.display = "none";
+        getid("remove").style.display = "none";
+      }
+      getid("add").style.display = "block";
+      getid("login-container").style.display = "none";
+      createSelect();
+    }
+    getid("overblock").style.display = "none";
+  })
 }
 window.readData = readData; // Torna a função global
 

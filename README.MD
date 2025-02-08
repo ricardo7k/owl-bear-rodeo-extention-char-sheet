@@ -14,12 +14,16 @@ This extension provides a custom character sheet for Owl Bear Rodeo (OBR) 2.0, a
     *   Notes
 *   **Real-time Synchronization:** Changes made by one player are reflected for all players in the same scene.
 *   **Customizable:**  The character sheet structure and fields are easily customizable by modifying the code.
-*   **Dice Roller Integration:** Acustom 3D dice roller.
+*   **Dice Roller Integration:** A custom 3D dice roller.
+*   **Random Dice:** Using RANDOM.ORG that offers true random numbers. The randomness comes from atmospheric noise, which for many purposes is better than the pseudo-random number algorithms typically used in computer programs. 
 
 ## Prerequisites
 
 *   An Owl Bear Rodeo 2.0 account.
 *   Basic understanding of HTML, CSS, and JavaScript.
+*   Three.js 
+*   EJS
+*   Dice Box Threejs
 *   Node.js and npm (or yarn) installed for the server component (if using the provided example server).
 
 ## Installation and Usage
@@ -27,24 +31,24 @@ This extension provides a custom character sheet for Owl Bear Rodeo (OBR) 2.0, a
 1.  **Clone the Repository:**
 
     ```bash
-    git clone [https://github.com/ricardo7k/owl-bear-rodeo-extention-char-sheet.git](https://www.google.com/search?q=https://github.com/ricardo7k/owl-bear-rodeo-extention-char-sheet.git)
+    git clone https://github.com/ricardo7k/owl-bear-rodeo-extention-char-sheet.git
     cd owl-bear-rodeo-extention-char-sheet
     ```
 
-2.  **Install Server Dependencies (Optional):**
+2.  **Install Server Dependencies:**
 
     If you are using the provided Node.js server for enhanced synchronization and data persistence (recommended):
 
     ```bash
     npm install
     ```
-    This project uses `firebase-admin`. You'll need a service account key. See the "Firebase Setup" section below.
+    This project uses `firebase-admin`. You'll need a service account key. See the "Firebase Setup" section below and Gemini to generate names.
 
 3.  **Configure Firebase (Optional - for Server):**
      *   Create a Firebase project in the Firebase console ([https://console.firebase.google.com/](https://www.google.com/url?sa=E&source=gmail&q=https://console.firebase.google.com/)).
     *   Enable Firestore Database.
     * Enable Authentication (Email/Password, Google, or other methods as needed).
-    *   Create a service account key and download the JSON file.  *Do not commit this file to your repository*.  Rename it to `serviceAccountKey.json` and place it in the server folder.
+    *   Create a service account key and download the JSON file.  *Do not commit this file to your repository*.  Set .env file with the serviceAccountKey and Gemini's APIKey.
     * Set Firestore Security rules.  An example rule is provided below, *but you should customize this for your specific security needs*.
 
     ```

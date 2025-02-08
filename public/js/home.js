@@ -167,7 +167,6 @@ function salvarPersonagem(e) {
   .then(response => response.json())
   .then(data => {
     if (data.success) {
-      getid("personagens").textContent = "";
       createSelect();
       // getid("personagens").value = data.id;
       showBox("Personagem modificado com successo.");
@@ -177,11 +176,11 @@ function salvarPersonagem(e) {
         getid("personagens").dispatchEvent(new Event("change"), selecionaPersonagem);
       }, 100);
     } else {
-      console.info('Erro ao salvar dados: ' + data.error);
+      console.info("** 💾 $","Erro ao salvar dados ❌:", data.error);
     }
   })
   .catch(error => {
-    console.error('Erro na requisição:', error);
+    console.info("** 💾 $","Erro na requisição ❌:", error);
   });
 }
 
@@ -229,19 +228,19 @@ function addPersonagem(e){
           }, 100);
           getid("overblock").style.display = "none";
         } else {
-          console.info('Erro ao salvar dados: ' + data.error);
+          console.error("** 💾 $","Erro ao salvar dados ❌:", data.error);
         }
       })
       .catch(error => {
-        console.error('Erro na requisição:', error);
+        console.error("** 💾 $","Erro na requisição ❌:", error);
       });    
     })
     .catch(error => {
-      console.error('Erro na requisição:', error);
+      console.error("** 💾 $","Erro na requisição ❌:", error);
     });
   })
   .catch(error => {
-    console.error('Erro na requisição:', error);
+    console.error("** 💾 $","Erro na requisição ❌:", error);
   });
 }
 
@@ -267,15 +266,16 @@ function removePersonagem(e){
       clearTela();
       window.readData();
     } else {
-      console.info('Erro ao salvar dados: ' + data.error);
+      console.info("** 💾 $","Erro ao salvar dados ❌:", data.error);
     }
   })
   .catch(error => {
-    console.error('Erro na requisição:', error);
+    console.error("** 💾 $","Erro na requisição ❌:", error);
   });
 }
 
 function createSelect(e) {
+  getid("personagens").textContent = "";
   for(i in personasArr) {
     var opt = document.createElement("option")
     opt.value = personasArr[i].id;

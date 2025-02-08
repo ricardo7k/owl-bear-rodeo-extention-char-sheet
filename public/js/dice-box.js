@@ -1,57 +1,67 @@
 import DiceBox from "/js/dice-box-threejs.es.js";
 import { showOBRNotification } from "/js/notificationUtils.js";
-import { createOBRNotification } from "/js/notificationUtils.js";
 
 var bonus = 0;
 var rolagem = "";
 var Box = {};
+var url_random = "https://www.random.org/integers/?min=1&col=1&base=10&format=plain&rnd=new";
 
 function cap(str) {
   return str.charAt(0).toUpperCase() + str.slice(1); 
 }
 
+//#FAIR RANDOM 
+function randomNum(n,d) {
+  return new Promise((resolve, reject) => {
+    fetch(`${url_random}&num=${n}&max=${d}`, { method: 'GET' })
+    .then(response => response.text())
+    .then(data => {
+      var a = data.split('\n');
+      a = a.slice(0,a.length-1);
+      if(a){
+        resolve(a);
+      } else {
+        reject("Erro no random.");
+      }
+    })
+  });
+}
+
 function rollAttr(e){
-  getid("app").style.display = "block";
   var lab = e.target.id.split("roll-").join("")
   bonus = getid(lab).value;
   rolagem = getid("char_name").value + " - " + cap(lab);
-  const values = [1, 2, 3, 4, 5, 6];
-  const randomVal = values[Math.floor(Math.random() * values.length)];
-  Box.roll(`1d6@${randomVal}`);
-  //showOBRNotification(`1d6@${randomVal}`, rolagem, bonus);
+  randomNum(1,6).then((data)=>{
+    Box.roll(`1d6@${data}`);
+    getid("app").style.display = "block";
+    showOBRNotification(`1d6@${data}`, rolagem, bonus);
+  });
 }
 
 function rollAttrEquip(e){
-  getid("app").style.display = "block";
   var lab = e.target.id.split("roll-").join("");
   var num = getid(lab).id.split("equipamento_").join("");
   bonus = getid(`bonus_${num}`).value;
   var dice = getid(`dano_${num}`).value;
   rolagem = getid("char_name").value + " - " + cap(getid(lab).value);
-  const values = dice.split("d")[0].split("@")[0]==6?[1, 2, 3, 4, 5, 6]:[1, 2, 3];
-  var randomVal = "";
-  for(i=0;i<Number(dice.split("d")[0]);i++) {
-    var dist = i==Number(dice.split("d")[0])-1?"":",";
-    randomVal += values[Math.floor(Math.random() * values.length)] + dist;
-  }
-  Box.roll(`${dice}@${randomVal}`)
-  showOBRNotification(`${dice}@${randomVal}`, rolagem, bonus);
+  var a = dice.split("d");
+  randomNum(a[0],a[1]).then((data)=>{
+    Box.roll(`${dice}@${data}`);
+    getid("app").style.display = "block";
+    showOBRNotification(`${dice}@${data}`, rolagem, bonus);
+  });
 }
 
 function rollAttrSolo(e){
-  getid("app").style.display = "block";
   var lab = "Custom Roll"
   bonus = 0;
   rolagem = getid("char_name").value + " - " + cap(lab);
   var dice = getid(`char_dados`).value;
-  const values = [1, 2, 3, 4, 5, 6];
-  var randomVal = "";
-  for(i=0;i<Number(dice.split("d")[0]);i++) {
-    var dist = i==Number(dice.split("d")[0])-1?"":",";
-    randomVal += values[Math.floor(Math.random() * values.length)] + dist;
-  }
-  Box.roll(`${dice}d6@${randomVal}`)
-  showOBRNotification(`${dice}d6@${randomVal}`, rolagem, bonus);
+  randomNum(dice,"6").then((data)=>{
+    Box.roll(`${dice}d6@${data}`);
+    getid("app").style.display = "block";
+    showOBRNotification(`${dice}d6@${data}`, rolagem, bonus);
+  });
 }
 
 function clearTable(e) {
@@ -90,13 +100,11 @@ function initDice() {
     },
   });
   Box.initialize().then((e) => { 
-    // Box.roll("2d6@1,2")
     getid("app").style.display = "none";
     getid("app").style.position = "fixed";
   });
 }
 
-createOBRNotification();
 //Buttons
 var arrBtns = document.getElementsByClassName("icon-dice");
 for(var i=0; i<arrBtns.length; i++) {

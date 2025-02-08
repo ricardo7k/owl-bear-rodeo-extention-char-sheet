@@ -20,6 +20,7 @@
   display: block;
   width: 100vw;
   height: 100vh;
+  z-index: 1;
 }
 
 .content {
@@ -192,7 +193,7 @@ textarea {
 }
 
 .name-box legend, .level-box legend {
-  font-size: 0.8rem; 
+  font-size: 0.7rem; 
   margin-bottom: 5px;  
 }
 
@@ -312,6 +313,7 @@ textarea {
   top: 10px;
   position: relative;
   margin-left: 5px;
+  z-index: 0;
 }
 
 #seleciona {
@@ -384,8 +386,8 @@ select {
   padding-right: 40px;
   cursor: pointer;
   transition: border-color 0.3s ease;
-  margin: 0 10px 0 0;
-  margin-bottom: 5px;
+  margin: 5px 10px 5px 0;
+  height: 40px;
 }
 
 select:hover {
