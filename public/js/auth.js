@@ -85,8 +85,9 @@ function initAuth() {
       readData("HOME");
     } else {
       console.info("============> onAuthStateChanged !user");
-      startHome();
       getid("overblock").style.display = "none";
+      getid("app").style.display = "none";
+      startHome();
       console.info("Nenhum usuário autenticado.");
     }
   });
