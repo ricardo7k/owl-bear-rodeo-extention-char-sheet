@@ -105,7 +105,7 @@ textarea {
   left: 10%;
   display: none;
   color: #0e0e0e;
-  border-radius: 12px 12px 0 0;
+  border-radius: 16px 16px 0 0;
   bottom: -100%;
   box-shadow: 1px -15px 40px #00000077;
   animation: appear 1s ease forwards;
