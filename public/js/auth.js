@@ -86,7 +86,7 @@ function initAuth() {
     } else {
       console.info("============> onAuthStateChanged !user");
       getid("overblock").style.display = "none";
-      getid("app").style.display = "none";
+      getid("app").style.left = "-10000px";
       startHome();
       console.info("Nenhum usuário autenticado.");
     }

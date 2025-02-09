@@ -34,6 +34,7 @@ function rollAttr(e){
     window.showOBRNotification(`1d6@${data}`, rolagem, bonus);
     Box.roll(`1d6@${data}`);
     getid("app").style.display = "block";
+    getid("app").style.left = "0";
   });
 }
 
@@ -48,6 +49,7 @@ function rollAttrEquip(e){
     window.showOBRNotification(`${dice}@${data}`, rolagem, bonus);
     Box.roll(`${dice}@${data}`);
     getid("app").style.display = "block";
+    getid("app").style.left = "0";
   });
 }
 
@@ -60,6 +62,7 @@ function rollAttrSolo(e){
     window.showOBRNotification(`${dice}d6@${data}`, rolagem, bonus);
     Box.roll(`${dice}d6@${data}`);
     getid("app").style.display = "block";
+    getid("app").style.left = "0";
   });
 }
 
