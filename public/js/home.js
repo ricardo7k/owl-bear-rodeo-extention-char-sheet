@@ -167,7 +167,7 @@ function salvarPersonagem(e) {
   .then(response => response.json())
   .then(data => {
     if (data.success) {
-      createSelect();
+      // createSelect();
       // getid("personagens").value = data.id;
       showBox("Personagem modificado com successo.");
       getid("overblock").style.display = "none";
@@ -276,7 +276,7 @@ function removePersonagem(e){
 }
 
 function createSelect(pagina) {
-  console.info("============> createSelect");
+  //console.info("============> createSelect");
   getid("personagens").textContent = "";
   for(i in personasArr) {
     var opt = document.createElement("option")
@@ -287,16 +287,16 @@ function createSelect(pagina) {
   getid("personagens").selectedIndex = 0;
   getid("personagens").dispatchEvent(new Event("change"), selecionaPersonagem);
   console.info(`============> createSelect try pagina HOME? (${pagina=="HOME"} && OWLCSHomeStarted? ${window.OWLCSHomeStarted}`);
-  console.info("============> createSelect Done");
+  //console.info("============> createSelect Done");
   window.OWLCSCreatedSelect = true;
   if(pagina=="HOME" && !window.OWLCSHomeStarted) startHome();
-  console.info("============> Try create window.initDice ");
-  window.initDice();
+  //console.info("============> Try create window.initDice ");
+  if(!window.diceStarted) window.initDice();
 }
 
 function startHome() {
   window.OWLCSHomeStarted = true;
-  console.info("============> Home startHome");
+  //console.info("============> Home startHome");
   var arrBtns = document.getElementsByClassName("icon-dice");
   for(var i=0; i<arrBtns.length; i++) {
     var bt = arrBtns[i];
@@ -307,6 +307,6 @@ function startHome() {
   getid("remove").addEventListener('click', removePersonagem);
   getid("add").addEventListener('click', addPersonagem);
   getid("salvar").addEventListener('click', salvarPersonagem);
-  console.info("============> Try startEquipamento");
+  //console.info("============> Try startEquipamento");
   startEquipamento();
 }

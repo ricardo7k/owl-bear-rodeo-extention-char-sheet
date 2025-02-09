@@ -1,5 +1,5 @@
 function startEquipamento(){
-  console.info("============> startEquipamento");
+  //console.info("============> startEquipamento");
   var nequip = 8;
   for(var i = 1; i<nequip+1; i++) {
     var content = document.createElement("div");

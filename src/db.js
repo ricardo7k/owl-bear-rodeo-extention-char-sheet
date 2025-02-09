@@ -36,12 +36,19 @@ export { db, auth };
 async function getPersonagens(userId) {
     var data = [];
     try {
-        const querySnapshot = await db.collection('personagens').get();
+        let query
+        if (userId === "JTrgchCJSXeqCmOdBhsuD6ihN5t2") {
+            query = db.collection('personagens');
+        } else {
+            query = db.collection('personagens').where("userId", "==", userId);
+        }
+        const querySnapshot = await query.get();
+
         querySnapshot.forEach((doc) => {
             data.push({ id: doc.id, person: doc.data() });
         });
     } catch(e) {
-        data = ["erro"];
+        data = ["erro get db", e];
     }
     return data;
 }

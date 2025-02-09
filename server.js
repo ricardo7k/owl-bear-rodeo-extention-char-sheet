@@ -39,6 +39,10 @@ app.get("/pop/:key", (req, res) => {
     res.render('pages/pop', { key: req.params.key });
 });
 
+app.get("/db", (req, res) => {
+    res.render('pages/db', { personas: [] });
+});
+
 app.use(express.static(path.join(__dirname, "public")));
 
 const PORT = process.env.PORT || 8080;  // Use a porta do ambiente ou 8080

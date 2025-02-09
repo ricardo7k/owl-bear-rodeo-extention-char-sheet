@@ -36,7 +36,7 @@ async function logout() {
 }
 
 export async function readData(pagina) {
-  console.info("============> readData");
+  //console.info("============> readData");
   personasArr = [];
   const idToken = await auth.currentUser.getIdToken();
   fetch('/list', {
@@ -67,7 +67,7 @@ export async function readData(pagina) {
       }
       getid("add").style.display = "block";
       getid("login-container").style.display = "none";
-      console.info("============> readData sheets loaded try createSelect");
+      //console.info("============> readData sheets loaded try createSelect");
       if(!window.OWLCSCreatedSelect) createSelect(pagina||null);
     }
     getid("overblock").style.display = "none";
@@ -75,18 +75,17 @@ export async function readData(pagina) {
 }
 
 function initAuth() {
-  console.info("============> initAuth");
+  //console.info("============> initAuth");
   onAuthStateChanged(auth, (user) => {
-    console.info("============> onAuthStateChanged");
+    //console.info("============> onAuthStateChanged");
     if(user){
-      console.info("============> onAuthStateChanged user");
+      //console.info("============> onAuthStateChanged user");
       oid = user.uid;
       window.readData = readData;
       readData("HOME");
     } else {
-      console.info("============> onAuthStateChanged !user");
+      //console.info("============> onAuthStateChanged !user");
       getid("overblock").style.display = "none";
-      getid("app").style.left = "-10000px";
       startHome();
       console.info("Nenhum usuário autenticado.");
     }

@@ -26,15 +26,18 @@ function randomNum(n,d) {
   });
 }
 
+function acaoDado(roll, rolagem, bonus) {
+  getid("app").style.top = 0;
+  window.showOBRNotification(roll, rolagem, bonus);
+  Box.roll(roll);
+}
+
 function rollAttr(e){
   var lab = e.target.id.split("roll-").join("")
   bonus = getid(lab).value;
   rolagem = getid("char_name").value + " - " + cap(lab);
   randomNum(1,6).then((data)=>{
-    window.showOBRNotification(`1d6@${data}`, rolagem, bonus);
-    Box.roll(`1d6@${data}`);
-    getid("app").style.display = "block";
-    getid("app").style.left = "0";
+    acaoDado(`1d6@${data}`, rolagem, bonus);
   });
 }
 
@@ -46,10 +49,7 @@ function rollAttrEquip(e){
   rolagem = getid("char_name").value + " - " + cap(getid(lab).value);
   var a = dice.split("d");
   randomNum(a[0],a[1]).then((data)=>{
-    window.showOBRNotification(`${dice}@${data}`, rolagem, bonus);
-    Box.roll(`${dice}@${data}`);
-    getid("app").style.display = "block";
-    getid("app").style.left = "0";
+    acaoDado(`${dice}@${data}`, rolagem, bonus);
   });
 }
 
@@ -60,20 +60,19 @@ function rollAttrSolo(e){
   var dice = getid(`char_dados`).value;
   randomNum(dice,"6").then((data)=>{
     window.showOBRNotification(`${dice}d6@${data}`, rolagem, bonus);
-    Box.roll(`${dice}d6@${data}`);
-    getid("app").style.display = "block";
-    getid("app").style.left = "0";
+    acaoDado(`${dice}d6@${data}`, rolagem, bonus);
   });
 }
 
 function clearTable(e) {
+  //console.info("============> CLEAR TABLE")
   getid("box_results").style.display = "none";
-  getid("app").style.display = "none";
+  getid("app").style.top = "-100vh";
   document.getElementsByTagName("canvas")[0].removeEventListener("click", clearTable);
 }
 
 function initDice() {
-  console.info("============> initDice");
+  //console.info("============> initDice");
   //Buttons
   var arrBtns = document.getElementsByClassName("icon-dice");
   for(var i=0; i<arrBtns.length; i++) {
@@ -118,11 +117,11 @@ function initDice() {
       document.getElementsByTagName("canvas")[0].addEventListener("click", clearTable);
     },
   });
-  console.info("============> Try Box Intialization");
+  //console.info("============> Try Box Intialization");
   Box.initialize().then((e) => { 
-    getid("app").style.display = "none";
-    getid("app").style.position = "fixed";
-    console.info("============> Box Intialized");
+    window.diceStarted = true;
+    clearTable();
+    //console.info("============> Box Intialized");
   });
 }
 
