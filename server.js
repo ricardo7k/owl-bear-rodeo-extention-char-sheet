@@ -61,7 +61,7 @@ app.use(express.static(path.join(__dirname, "public")));
 const PORT = process.env.PORT || 8080;
 
 async function startServer() {
-  
+  //Teste Push 2
   // try {
   //   await logging.log(logName).write(entry);
   //   console.log('Log de inicialização escrito com sucesso.');
