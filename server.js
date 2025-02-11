@@ -15,10 +15,12 @@ require('dotenv').config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+console.info("tmp")
 const tempFile = tmp.fileSync();
 fs.writeFileSync(tempFile.name, process.env.GOOGLE_APPLICATION_CREDENTIALS);
 
 const logging = new Logging({ keyFilename: tempFile.name });
+console.info(tempFile.name);
 
 const logName = 'cloud-run-running';
 
