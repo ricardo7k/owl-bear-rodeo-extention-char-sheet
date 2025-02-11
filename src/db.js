@@ -4,20 +4,20 @@ import 'dotenv/config'; // Carrega as variáveis de ambiente do .env
 const require = createRequire(import.meta.url);
 const admin = require('firebase-admin');
 
-var FIREBASE_SERVICE_ACCOUNT = process.env.GOOGLE_APPLICATION_CREDENTIALS;
+var GOOGLE_APPLICATION_CREDENTIALS = process.env.GOOGLE_APPLICATION_CREDENTIALS;
 
 var serviceAccount;
-var serviceAccountString = FIREBASE_SERVICE_ACCOUNT;
+var serviceAccountString = GOOGLE_APPLICATION_CREDENTIALS;
 
 if(serviceAccountString) {
     try {
         serviceAccount = JSON.parse(serviceAccountString);
     } catch (error) {
-        console.error("ERRO: A variável de ambiente FIREBASE_SERVICE_ACCOUNT não é um JSON válido.", error);
+        console.error("ERRO: A variável de ambiente GOOGLE_APPLICATION_CREDENTIALS não é um JSON válido.", error);
         process.exit(1);
     }
 } else {
-    console.error("ERRO: A variável de ambiente FIREBASE_SERVICE_ACCOUNT não está definida.");
+    console.error("ERRO: A variável de ambiente GOOGLE_APPLICATION_CREDENTIALS não está definida.");
 }
 
 if (admin.apps.length === 0) {
