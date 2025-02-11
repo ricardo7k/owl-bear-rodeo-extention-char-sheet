@@ -4,7 +4,7 @@ import 'dotenv/config'; // Carrega as variáveis de ambiente do .env
 const require = createRequire(import.meta.url);
 const admin = require('firebase-admin');
 
-var FIREBASE_SERVICE_ACCOUNT = process.env.FIREBASE_SERVICE_ACCOUNT;
+var FIREBASE_SERVICE_ACCOUNT = process.env.GOOGLE_APPLICATION_CREDENTIALS;
 
 var serviceAccount;
 var serviceAccountString = FIREBASE_SERVICE_ACCOUNT;

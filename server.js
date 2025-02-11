@@ -1,16 +1,35 @@
 // server.js
 import express from 'express';
 import cors from 'cors';
-import router from './src/routes.js';  // Importa as rotas
+import router from './src/routes.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { Logging } from '@google-cloud/logging';
+import { createRequire } from 'module';
+import tmp from 'tmp';
+import fs from 'fs';
 
-const __filename = fileURLToPath(import.meta.url); //Para usar o __dirname
+const require = createRequire(import.meta.url);
+require('dotenv').config();
+
+const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const tempFile = tmp.fileSync();
+fs.writeFileSync(tempFile.name, process.env.GOOGLE_APPLICATION_CREDENTIALS);
+
+const logging = new Logging({ keyFilename: tempFile.name });
+
+const logName = 'cloud-run-running';
+
+const entry = {
+    resource: { type: 'global' },
+    payload: { message: 'SUCCESS' },
+    severity: 'INFO',
+};
 
 const app = express();
 
-// Middleware
 app.use(function(req, res, next){
     res.header('Access-Control-Allow-Private-Network', 'true');
     res.header('Access-Control-Allow-Origin', 'https://www.owlbear.rodeo');
@@ -26,11 +45,8 @@ app.use(function(req, res, next){
 
 app.use(express.json());
 app.set('view engine', 'ejs');
-
-// Rotas da API (usando o router)
 app.use(router);
 
-// Rotas estáticas e de templates (se você estiver usando)
 app.get("/", (req, res) => {
     res.render('pages/index', { personas: [] });
 });
@@ -39,13 +55,23 @@ app.get("/pop/:key", (req, res) => {
     res.render('pages/pop', { key: req.params.key });
 });
 
-app.get("/db", (req, res) => {
-    res.render('pages/db', { personas: [] });
-});
-
 app.use(express.static(path.join(__dirname, "public")));
 
-const PORT = process.env.PORT || 8080;  // Use a porta do ambiente ou 8080
-app.listen(PORT, () => {
+const PORT = process.env.PORT || 8080;
+
+async function startServer() {
+  try {
+    await logging.log(logName).write(entry);
+    console.log('Log de inicialização escrito com sucesso.');
+  } catch (error) {
+    console.error('Erro ao escrever o log de inicialização:', error);
+  }
+
+  app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
-});
+  });
+}
+
+startServer();
+
+
