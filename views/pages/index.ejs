@@ -215,6 +215,78 @@
           </div>
         </fieldset>
       </div>
+      <div class="ui-line">
+        <fieldset class="char-box">
+          <legend>Seu Cavalo</legend>
+          <div class="content-box"> 
+            <div class="name-box">
+              <legend>Nome</legend>
+              <input type="text" name="horse_name" id="horse_name" value="">
+            </div>
+            <div class="level-box">
+              <legend>Fidelity</legend>
+                <input type="text" name="fid_level" id="fid_level" value="" disabled>
+            </div>
+          </div>
+          <div class="ui-line">
+            <fieldset class="attr-box">
+              <div class="atributo">
+                <label for="potencia">Potência:</label>
+                <input type="range" id="potencia" name="potencia" min="0" max="5" value="0">
+                <span id="potenciaValor">0</span>
+                <span id="roll-potencia" class="icon-dice"></span>
+              </div>
+              <div class="atributo">
+                <label for="vigor">Vigor:</label>
+                <input type="range" id="vigor" name="vigor" min="0" max="5" value="0">
+                <span id="vigorValor">0</span>
+                <span id="roll-vigor" class="icon-dice"></span>
+              </div>
+            </fieldset>
+            <div class="content-box support-box">
+              <fieldset>
+                <legend>Vida</legend>
+                <input type="text" name="horse-vida" id="horse-vida" value="">
+              </fieldset>
+              <fieldset>
+                <legend>Defesa</legend>
+                <input type="text" name="horse-def" id="horse-def" value="">
+              </fieldset>
+              <fieldset>
+                <legend>Dano</legend>
+                <input type="text" name="horse-dano" id="horse-dano" value="">
+              </fieldset>
+            </div>
+            <fieldset class="attr-box">
+              <legend>Fidelidade</legend>
+              <div class="horse-linha">
+                <div>
+                  <input type="checkbox" id="fids1" name="fids1" value="fids1">
+                  <label for="fids">Antes de mais nada, dê um nome a seu animal. Agora sabe quando você está falando com ele.</label>
+                </div>
+                <div>
+                  <input type="checkbox" id="fids2" name="fids2" value="fids2">
+                  <label for="fids">O Cavalo corre mais rápido e pode saltar mais longe. Adicione +1 à sua Potência.</label>
+                </div>
+                <div>
+                  <input type="checkbox" id="fids3" name="fids3" value="fids3">
+                  <label for="fids">O Cavalo vai até você com um assovio, e não permite que outras pessoas o montem.</label>
+                </div>
+                <div>
+                  <input type="checkbox" id="fids4" name="fids4" value="fids4">
+                  <label for="fids">Seu Cavalo está mais esbelto e forte. Adicione + 2 à sua potência.</label>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset class="attr-box">
+              <legend>Equipamento</legend>
+              <div class="atributo">
+                <textarea id="horse-equip"></textarea>
+              </div>
+            </fieldset>
+              </div>
+        </fieldset>
+      </div>
       <div class="ui-line box-salvar">
         <fieldset class="char-box">
           <div class="atributo">

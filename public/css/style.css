@@ -283,6 +283,8 @@ textarea {
   filter: invert(51%) sepia(91%) saturate(223%) hue-rotate(62deg) brightness(95%) contrast(102%);
 }
 
+#vigorValor,
+#potenciaValor,
 #fisicoValor,
 #agilidadeValor,
 #intelectoValor,
@@ -463,6 +465,21 @@ select option {
   z-index: 100;
   justify-content: center; /* Centraliza horizontalmente */
   align-items: center;  
+}
+
+.horse-linha {
+  display: flex;
+  flex-direction: column; /* Alinha os itens verticalmente */
+  width: 100%;
+  align-items: flex-start; /* Alinha os itens ao início da linha (esquerda) */
+}
+.horse-linha div {
+  display: flex;
+  margin: 5px 0 5px 0;
+}
+.horse-linha div label {
+  display: inline-block;
+  margin-left: 10px;
 }
 
 @keyframes rotation {

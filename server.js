@@ -61,12 +61,12 @@ app.use(express.static(path.join(__dirname, "public")));
 const PORT = process.env.PORT || 8080;
 
 async function startServer() {
-  try {
-    await logging.log(logName).write(entry);
-    console.log('Log de inicialização escrito com sucesso.');
-  } catch (error) {
-    console.error('Erro ao escrever o log de inicialização:', error);
-  }
+  // try {
+  //   await logging.log(logName).write(entry);
+  //   console.log('Log de inicialização escrito com sucesso.');
+  // } catch (error) {
+  //   console.error('Erro ao escrever o log de inicialização:', error);
+  // }
 
   app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);

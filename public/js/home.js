@@ -51,6 +51,21 @@ function clearTela() {
       getid(`bonus_${p}`).value = "";
     }
     getid("reputacaoValor").textContent = getid("reputacao").value = "";
+
+    getid("horse_name").value = "";
+    getid("fid_level").value = "";
+    getid("potencia").value = "";
+    getid("vigor").value = "";
+    getid("horse-equip").value = "";
+
+    getid("horse-vida").value = "";
+    getid("horse-def").value = "";
+    getid("horse-dano").value = "";
+
+    for(var i=0; i<4; i++) {
+      getid(`fids${i+1}`).checked = false;
+    }
+
 }
 
 function updateTela(person) {
@@ -92,6 +107,22 @@ function updateTela(person) {
       getid(`bonus_${p}`).value = person.equipamentos[i].bonus || "";
     }
     getid("reputacaoValor").textContent = getid("reputacao").value = person.reputacao || "";
+
+    if(person.cavalo) {
+      getid("horse_name").value = person.cavalo.nome;
+      getid("fid_level").value = person.cavalo.fidelity;
+      getid("potencia").value = person.cavalo.potencia;
+      getid("vigor").value = person.cavalo.vigor;
+      getid("horse-equip").value = person.cavalo.equipamento;
+      getid("horse-vida").value = person.cavalo.vida;
+      getid("horse-def").value = person.cavalo.defesa;
+      getid("horse-dano").value = person.cavalo.dano;
+    if(person.cavalo.fidelity) {
+        for(var i=0; i<4; i++) {
+          if(i<person.cavalo.fidelity) getid(`fids${i+1}`).checked = true;
+        }
+      }
+    }
 }
 
 function selecionaPersonagem(e) {
@@ -152,7 +183,17 @@ function salvarPersonagem(e) {
       bonus: getid(`bonus_${p}`).value
     })
   }
+  if(!person.cavalo) person.cavalo = {}
+  person.cavalo.nome = getid("horse_name").value;
+  person.cavalo.fidelity = getid("fid_level").value;
+  person.cavalo.potencia = getid("potencia").value;
+  person.cavalo.vigor = getid("vigor").value;
+  person.cavalo.equipamento = getid("horse-equip").value;
 
+  person.cavalo.vida = getid("horse-vida").value;
+  person.cavalo.defesa = getid("horse-def").value;
+  person.cavalo.dano = getid("horse-dano").value;
+  
   fetch('/salvar', {
     method: 'POST',
     headers: {
@@ -290,6 +331,19 @@ function createSelect(pagina) {
   //console.info("============> createSelect Done");
   window.OWLCSCreatedSelect = true;
   if(pagina=="HOME" && !window.OWLCSHomeStarted) startHome();
+
+  for(var i=0; i<4; i++) {
+    getid(`fids${i+1}`).addEventListener('click', (e) => {
+      getid(`fid_level`).value = e.target.name.split("fids").join("");
+      for(var j=0; j<4; j++) {
+        getid(`fids${j+1}`).checked = false;
+        if(j<getid(`fid_level`).value) {
+          getid(`fids${j+1}`).checked = true;
+        }
+      }
+    })
+  }
+
   //console.info("============> Try create window.initDice ");
   if(!window.diceStarted) window.initDice();
 }
