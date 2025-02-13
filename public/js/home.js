@@ -173,7 +173,7 @@ function salvarPersonagem(e) {
   person.habilidades = getid("habilidades").value;
   person.anotacoes = getid("anotacoes").value;
   person.reputacao = getid("reputacao").value;
-  person.userId = oid
+  //person.userId = oid
   person.equipamentos = []
   for(let j=0; j<8; j++) {
     var p = Number(j)+1;
