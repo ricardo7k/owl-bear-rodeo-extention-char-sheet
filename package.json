@@ -19,10 +19,9 @@
     "ejs": "^3.1.10",
     "express": "^4.21.2",
     "firebase-admin": "^13.1.0",
+    "inflight": "^1.0.6",
     "socket.io": "^4.8.1",
+    "source-list-map": "^2.0.1",
     "tmp": "^0.2.3"
-  },
-  "resolutions": {
-    "inflight": "^2.0.0"
   }
 }
