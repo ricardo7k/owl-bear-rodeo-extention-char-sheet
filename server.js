@@ -29,13 +29,13 @@ const entry = {
     severity: 'INFO',
 };
 
-require('@google-cloud/profiler').start({
-  projectId: 'fir-owl-d0a23',
-  serviceContext: {
-    service: 'owlbear-character-sheet',
-    version: '1.0.0',
-  },
-});
+// require('@google-cloud/profiler').start({
+//   projectId: 'fir-owl-d0a23',
+//   serviceContext: {
+//     service: 'owlbear-character-sheet',
+//     version: '1.0.0',
+//   },
+// });
 
 const app = express();
 
