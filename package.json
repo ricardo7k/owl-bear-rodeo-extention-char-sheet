@@ -12,6 +12,7 @@
   "description": "",
   "dependencies": {
     "@google-cloud/logging": "^11.2.0",
+    "@google-cloud/profiler": "^6.0.2",
     "@google/generative-ai": "^0.21.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",

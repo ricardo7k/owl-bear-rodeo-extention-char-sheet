@@ -14,12 +14,12 @@ require('dotenv').config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-console.info("tmp")
+//console.info("tmp")
 const tempFile = tmp.fileSync();
 fs.writeFileSync(tempFile.name, process.env.GOOGLE_APPLICATION_CREDENTIALS);
 
 const logging = new Logging({ keyFilename: tempFile.name });
-console.info(tempFile.name);
+//console.info(tempFile.name);
 
 const logName = 'cloud-run-running';
 
@@ -28,6 +28,14 @@ const entry = {
     payload: { message: 'SUCCESS' },
     severity: 'INFO',
 };
+
+require('@google-cloud/profiler').start({
+  projectId: 'fir-owl-d0a23',
+  serviceContext: {
+    service: 'owlbear-character-sheet',
+    version: '1.0.0',
+  },
+});
 
 const app = express();
 
