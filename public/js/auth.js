@@ -95,3 +95,4 @@ function initAuth() {
 }
 
 window.initAuthGoogleAuthentication = initAuth;
+window.authFirestore = firestore;

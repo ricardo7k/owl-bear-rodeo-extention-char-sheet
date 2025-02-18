@@ -21,6 +21,7 @@
             </select>
             <input type="button" id="add" name="add" value="+" style="display:none">
             <input type="button" id="remove" name="remove" value="-" style="display:none">
+            <div id="chatbt" class="icon-chat" style="display:none"></div>
             <div id="login-container">
                 <button id="google-login-button">Login</button>
             </div>
@@ -304,6 +305,23 @@
         </fieldset>
       </div> 
     </div>
+    <div id="chat-container">
+      <div class="chat-window">
+        <div class="chat-header">
+          <button id="close-chat">×</button>
+        </div>
+        <div id="chat-box"></div>
+        <div class="chat-input">
+          <form id="chat-form">
+            <input type="text" id="message-input" placeholder="Digite sua mensagem...">
+            <button type="submit" id="send-message">Enviar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/js/chat.js"></script>
+
     <script type="text/javascript">
       var personasArr = [];
       var oid = null;

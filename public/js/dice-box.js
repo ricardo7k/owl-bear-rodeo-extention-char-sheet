@@ -26,10 +26,65 @@ function randomNum(n,d) {
   });
 }
 
-function acaoDado(roll, rolagem, bonus) {
+function somarRolagens(dados, bonus) {
+  // 1. Extrair informações da string 'dados'
+  const [dadosStr, resultadosStr] = dados.split('@');
+  const [numDados, facesDado] = dadosStr.split('d').map(Number);
+
+  // Trata casos onde não há 'd' ou número de dados explicitamente.
+  const numDadosFinal = isNaN(numDados) ? 1 : numDados;
+  const facesDadoFinal = isNaN(facesDado) ? (isNaN(numDados) ? null : numDados) : facesDado;
+
+  if (facesDadoFinal === null) {
+      return NaN; // Formato inválido (ex: "@1,2")
+  }
+
+  // 2. Processar os resultados da rolagem
+  const resultados = resultadosStr.split(',').map(Number);
+
+  // 3. Validar os resultados
+  if (resultados.some(isNaN)) {
+      return NaN; // Se algum resultado não for um número, retorna NaN
+  }
+  if (resultados.length !== numDadosFinal) {
+    //  return NaN;  // Número incorreto de resultados.  Removido para permitir casos como 2d6@5 (um dos dados deu 5, o outro não importa)
+  }
+
+  // 4. Calcular a soma das rolagens
+  const somaRolagens = resultados.reduce((sum, val) => sum + val, 0);
+
+
+  // 5. Processar o bônus
+  const bonusNumerico = parseInt(bonus, 10);
+  if (isNaN(bonusNumerico)) {
+      return NaN; // Bônus inválido
+  }
+
+  // 6. Calcular o total final
+  const totalFinal = somaRolagens + bonusNumerico;
+
+   return {
+      numDados: numDadosFinal,
+      facesDado: facesDadoFinal,
+      resultados: resultados,
+      somaRolagens: somaRolagens,
+      bonus: bonusNumerico,
+      total: totalFinal
+  };
+}
+
+function acaoDado(roll, rolagem, bonus, lab) {
   getid("app").style.top = 0;
   window.showOBRNotification(roll, rolagem, bonus);
   Box.roll(roll);
+  window.addMessage(
+    getid("char_name").value, 
+    window.userId, 
+    `<span>${lab} | ${roll.split("@")[0]} + (${bonus}):</span> 
+    ${somarRolagens(roll, bonus).resultados.join(" + ")} + 
+    (${somarRolagens(roll, bonus).bonus}) =
+    ${somarRolagens(roll, bonus).total}`
+  );
 }
 
 function rollAttr(e){
@@ -37,7 +92,7 @@ function rollAttr(e){
   bonus = getid(lab).value;
   rolagem = getid("char_name").value + " - " + cap(lab);
   randomNum(1,6).then((data)=>{
-    acaoDado(`1d6@${data}`, rolagem, bonus);
+    acaoDado(`1d6@${data}`, rolagem, bonus, cap(lab));
   });
 }
 
@@ -49,7 +104,7 @@ function rollAttrEquip(e){
   rolagem = getid("char_name").value + " - " + cap(getid(lab).value);
   var a = dice.split("d");
   randomNum(a[0],a[1]).then((data)=>{
-    acaoDado(`${dice}@${data}`, rolagem, bonus);
+    acaoDado(`${dice}@${data}`, rolagem, bonus, cap(getid(lab).value));
   });
 }
 
@@ -60,7 +115,7 @@ function rollAttrSolo(e){
   var dice = getid(`char_dados`).value;
   randomNum(dice,"6").then((data)=>{
     window.showOBRNotification(`${dice}d6@${data}`, rolagem, bonus);
-    acaoDado(`${dice}d6@${data}`, rolagem, bonus);
+    acaoDado(`${dice}d6@${data}`, rolagem, bonus, cap(lab));
   });
 }
 
@@ -126,3 +181,5 @@ function initDice() {
 }
 
 window.initDice = initDice;
+window.acaoDado = acaoDado;
+window.randomNum = randomNum;

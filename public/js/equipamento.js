@@ -45,4 +45,5 @@ function startEquipamento(){
 
     getclass("equip-box")[0].appendChild(content);
   }
+  window.initChat();
 }

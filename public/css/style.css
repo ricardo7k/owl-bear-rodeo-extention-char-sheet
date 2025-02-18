@@ -107,7 +107,7 @@ textarea {
   display: none;
   color: #0e0e0e;
   border-radius: 16px 16px 0 0;
-  bottçm: -100%;
+  bottom: -100%;
   box-shadow: 1px -15px 40px #00000077;
   animation: appear 1s ease forwards;
   z-index: 2;
@@ -265,7 +265,7 @@ textarea {
   text-align: center; /* Centraliza o texto nos spans */
 }
 
-.icon-dice, .icon-dice-equip, .icon-dice-solo {
+.icon-dice, .icon-dice-equip, .icon-dice-solo, .icon-chat {
   background-image: url(/img/dice-d6.png);
   background-repeat: no-repeat;
   background-size: 20px;
@@ -275,8 +275,12 @@ textarea {
   filter: invert(51%) sepia(91%) saturate(223%) hue-rotate(162deg) brightness(95%) contrast(102%);
   cursor: pointer; 
   animation: filter 0.5s linear infinite;
-
 }
+.icon-chat {
+  background-image: url(/img/chat.png);
+}
+
+.icon-chat:hover,
 .icon-dice:hover, 
 .icon-dice-equip:hover,
 .icon-dice-solo:hover {
@@ -493,3 +497,110 @@ select option {
  #tormento {
   height: 90px;
  }
+
+
+ /*chat*/
+
+ /* Basic styling for the chat window */
+ #chat-container {
+  width: 60vw;
+  height: 80vh;
+  top: 20px;
+  right: -60vw;
+  border: 1px solid #213547;
+  border-radius: 16px;
+  padding: 10px;
+  margin: 0;
+  background-color: #1c1c1c;
+  position: fixed;
+  box-shadow: 10px 5px 5px #00000077;
+  box-sizing: border-box;
+  transition: right 0.5s ease;
+  z-index: 3;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: flex-end; /* Alinha o botão à direita */
+  padding: 5px;
+  border-bottom: 1px solid #ccc;
+  border-radius: 14px 14px 0 0;
+}
+
+#close-chat {
+  width: 30px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+#chat-container.visible {
+  right: 20px;
+}
+
+#chat-box {
+  height: 90%;
+  overflow-y: auto;
+}
+
+#chat-box fieldset{
+  margin-bottom: 20px; 
+}
+
+#chat-box fieldset div span{
+  display: flex;
+  font-size: 11px;
+  color: #7b7b7b;
+}
+
+#chat-box fieldset div{
+  font-size: 25px;
+}
+
+.chat-window {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+}
+
+#chat-messages {
+  flex-grow: 1; /* Allow messages area to expand */
+  overflow-y: scroll; /* Add scrollbar if needed */
+  padding: 10px;
+}
+
+.chat-input {
+  padding: 20px 0 0;
+  border-top: 1px solid #ccc;
+  display: flex;
+}
+
+#chat-input-box {
+  flex-grow: 1; /* Allow input to expand */
+  padding: 5px;
+  border: 1px solid #ccc;
+}
+
+
+#send-message {
+  background-color: #4CAF50; /* Green */
+  margin-left: 10px;
+}
+
+form {
+  width: 100%;
+  display: flex;
+}
+
+#message-input {
+  gap: 10px;
+  display: flex;
+  flex: auto;
+}
+
+#chatbt {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
