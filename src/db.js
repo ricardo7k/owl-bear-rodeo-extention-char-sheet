@@ -29,10 +29,8 @@ if (admin.apps.length === 0) {
 const db = admin.firestore();
 const auth = admin.auth();
 
-// Exporte db e auth *APÓS* a inicialização
 export { db, auth };
 
-// Funções para interagir com o Firestore (CRUD) - Mantenha como antes
 async function getPersonagens(userId) {
     var data = [];
     try {

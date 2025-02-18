@@ -169,11 +169,11 @@ function salvarPersonagem(e) {
   person.antecedentes.exploracao = getid("exploracao").value;
   person.antecedentes.roubo = getid("roubo").value;
   person.antecedentes.medicina = getid("medicina").value;
-  person.tormento =getid("tormento").value;
+  person.tormento = getid("tormento").value;
   person.habilidades = getid("habilidades").value;
   person.anotacoes = getid("anotacoes").value;
   person.reputacao = getid("reputacao").value;
-  person.userId = oid
+  person.userId = getid("personagens").childNodes[getid("personagens").selectedIndex].getAttribute("data-userId");
   person.equipamentos = []
   for(let j=0; j<8; j++) {
     var p = Number(j)+1;
@@ -203,6 +203,7 @@ function salvarPersonagem(e) {
     body: JSON.stringify({
       documentId: selectedId,
       dados: person,
+      userId: window.userId
     }),
   })
   .then(response => response.json())
@@ -245,7 +246,7 @@ function addPersonagem(e){
           'Authorization': `Bearer ${_idToken}`
         },
         body: JSON.stringify({
-          userId: oid,
+          userId: window.userId,
           name: data.name,
           history: data.history
         }),
@@ -322,6 +323,7 @@ function createSelect(pagina) {
   for(i in personasArr) {
     var opt = document.createElement("option")
     opt.value = personasArr[i].id;
+    opt.setAttribute("data-userId", personasArr[i].person.userId);
     opt.textContent = personasArr[i].person.nome;
     getid("personagens").appendChild(opt)
   }
@@ -355,7 +357,7 @@ function startHome() {
   for(var i=0; i<arrBtns.length; i++) {
     var bt = arrBtns[i];
     var lab = bt.id.split("roll-").join("");
-    getid(lab).addEventListener('input', (e) => atualizarValor(e.target.id.split("roll-").join(""), `${e.target.id.split("roll-").join("")}Valor`));
+    if(arrBtns[i].id!="roll-combate1") getid(lab).addEventListener('input', (e) => atualizarValor(e.target.id.split("roll-").join(""), `${e.target.id.split("roll-").join("")}Valor`));
   }
   getid("personagens").addEventListener('change', selecionaPersonagem);
   getid("remove").addEventListener('click', removePersonagem);

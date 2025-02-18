@@ -33,7 +33,7 @@ function acaoDado(roll, rolagem, bonus) {
 }
 
 function rollAttr(e){
-  var lab = e.target.id.split("roll-").join("")
+  var lab = (e.target.id=="roll-combate1")?"combate":e.target.id.split("roll-").join("")
   bonus = getid(lab).value;
   rolagem = getid("char_name").value + " - " + cap(lab);
   randomNum(1,6).then((data)=>{

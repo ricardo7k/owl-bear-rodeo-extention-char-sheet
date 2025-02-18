@@ -11,7 +11,7 @@ const router = Router();
 var GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
+const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash"});
 
 router.get('/name', async (req, res) => {    
     try {
@@ -52,7 +52,7 @@ router.get('/list', verifyToken, async (req, res) => {
     try {
         const userId = req.user.uid;
         const data = await getPersonagens(userId);
-        res.json({ success: true, personas: data });
+        res.json({ success: true, personas: data, userId:userId });
     } catch (error) {
         console.error("Erro ao ler dados do Firestore:", error);
         res.status(500).json({ success: false, error: error.message }); // Melhor prática: enviar o erro no JSON
@@ -63,7 +63,7 @@ router.post('/salvar', verifyToken, async (req, res) => {
     try {
         const { documentId, dados } = req.body;
         const id = await salvarPersonagem(documentId, dados);
-        res.json({ success: true, id });
+        res.json({ success: true, id: req.body.userId });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
     }

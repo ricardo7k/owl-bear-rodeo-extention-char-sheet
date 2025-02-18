@@ -52,6 +52,7 @@ export async function readData(pagina) {
       personasArr = [];
       ntimes=0
       _idToken = idToken;
+      window.userId = data.userId;
       personasArr = data.personas;
       if(personasArr.length>0) {
         getid("personagens").style.display = "block";
