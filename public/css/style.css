@@ -503,10 +503,10 @@ select option {
 
  /* Basic styling for the chat window */
  #chat-container {
-  width: 60vw;
+  width: 80vw;
   height: 80vh;
   top: 20px;
-  right: -60vw;
+  right: -80vw;
   border: 1px solid #213547;
   border-radius: 16px;
   padding: 10px;
