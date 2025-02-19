@@ -26,7 +26,7 @@ function randomNum(n,d) {
   });
 }
 
-function somarRolagens(dados, bonus) {
+function somarRolagens(dados, _bonus) {
   // 1. Extrair informações da string 'dados'
   const [dadosStr, resultadosStr] = dados.split('@');
   const [numDados, facesDado] = dadosStr.split('d').map(Number);
@@ -55,7 +55,7 @@ function somarRolagens(dados, bonus) {
 
 
   // 5. Processar o bônus
-  const bonusNumerico = parseInt(bonus, 10);
+  const bonusNumerico = parseInt(_bonus, 10);
   if (isNaN(bonusNumerico)) {
       return NaN; // Bônus inválido
   }
@@ -73,8 +73,11 @@ function somarRolagens(dados, bonus) {
   };
 }
 
-function acaoDado(roll, rolagem, bonus, lab) {
+function acaoDado(roll, rolagem, _bonus, lab) {
   getid("app").style.top = 0;
+  bonus = _bonus;
+  console.info(roll, "|", rolagem, "|", bonus, "|", lab)
+  console.info(">>>>>>>>>", bonus)
   window.showOBRNotification(roll, rolagem, bonus);
   Box.roll(roll);
   window.addMessage(

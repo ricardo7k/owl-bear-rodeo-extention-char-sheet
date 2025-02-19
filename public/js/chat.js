@@ -55,15 +55,15 @@ function rolarDados(comando) {
 
 function addMessage(nome, userId, conteudo) {
     if(conteudo.indexOf("/r")==0) {
-        //@TODO: rolagem no chat
-        // let cmd = rolarDados(conteudo);
-        // let lab = "Chat Roll"
-        // let bonus = cmd.modificadores.join("+");
-        // let rolagem = getid("char_name").value + " - " + lab;
-        // window.randomNum(cmd.numDados,cmd.facesDado).then((data)=>{
-        //   window.showOBRNotification(`${cmd.numDados}d${cmd.facesDado}@${data}`, rolagem, bonus);
-        //   window.acaoDado(`${cmd.numDados}d${cmd.facesDado}@${data}`, rolagem, bonus, lab);
-        // });        
+        let cmd = rolarDados(conteudo);
+        var lab = "Chat Roll";
+        var _bonus = cmd.somaModificadores;
+        var dice = `${cmd.numDados}d${cmd.facesDado}`;
+        var rolagem = getid("char_name").value + " - " + lab;
+        var a = dice.split("d");
+        randomNum(a[0],a[1]).then((data)=>{
+            acaoDado(`${dice}@${data}`, rolagem, _bonus, lab);
+        });    
         return;
     }
     var timestamp = new Date().getTime();

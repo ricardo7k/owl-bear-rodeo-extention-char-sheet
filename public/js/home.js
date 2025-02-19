@@ -329,7 +329,7 @@ function createSelect(pagina) {
   }
   getid("personagens").selectedIndex = 0;
   getid("personagens").dispatchEvent(new Event("change"), selecionaPersonagem);
-  console.info(`============> createSelect try pagina HOME? (${pagina=="HOME"} && OWLCSHomeStarted? ${window.OWLCSHomeStarted}`);
+  //console.info(`============> createSelect try pagina HOME? (${pagina=="HOME"} && OWLCSHomeStarted? ${window.OWLCSHomeStarted}`);
   //console.info("============> createSelect Done");
   window.OWLCSCreatedSelect = true;
   if(pagina=="HOME" && !window.OWLCSHomeStarted) startHome();

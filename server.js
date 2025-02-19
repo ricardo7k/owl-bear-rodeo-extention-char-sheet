@@ -1,5 +1,4 @@
 import express from 'express';
-import cors from 'cors';
 import router from './src/routes.js';
 import path from 'path';
 import tmp from 'tmp';
@@ -14,28 +13,8 @@ require('dotenv').config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-//console.info("tmp")
 const tempFile = tmp.fileSync();
 fs.writeFileSync(tempFile.name, process.env.GOOGLE_APPLICATION_CREDENTIALS);
-
-const logging = new Logging({ keyFilename: tempFile.name });
-//console.info(tempFile.name);
-
-const logName = 'cloud-run-running';
-
-const entry = {
-    resource: { type: 'global' },
-    payload: { message: 'SUCCESS' },
-    severity: 'INFO',
-};
-
-// require('@google-cloud/profiler').start({
-//   projectId: 'fir-owl-d0a23',
-//   serviceContext: {
-//     service: 'owlbear-character-sheet',
-//     version: '1.0.0',
-//   },
-// });
 
 const app = express();
 
@@ -69,14 +48,6 @@ app.use(express.static(path.join(__dirname, "public")));
 const PORT = process.env.PORT || 8080;
 
 async function startServer() {
-  //teste push git deploy
-  // try {
-  //   await logging.log(logName).write(entry);
-  //   console.log('Log de inicialização escrito com sucesso.');
-  // } catch (error) {
-  //   console.error('Erro ao escrever o log de inicialização:', error);
-  // }
-
   app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
   });
