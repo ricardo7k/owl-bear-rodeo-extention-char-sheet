@@ -4,64 +4,50 @@ let chatCollection;
 
 
 function rolarDados(comando) {
-    // Expressão regular para validar e extrair os componentes do comando.
     const regex = /^\/r\s+((\d+)?d(\d+))(?:\s*([+-]\s*\d+))?(?:\s*([+-]\s*\d+))*$/i;
     const match = comando.match(regex);
-
 
     if (!match) {
         return { error: "Comando inválido. Use o formato /r NdD+X+Y..." };
     }
 
-    // Extrai os componentes da regex.
-    const numDados = parseInt(match[2] || 1, 10);  // Usa 1 como padrão se não houver número de dados.
+    const numDados = parseInt(match[2] || 1, 10);
     const facesDado = parseInt(match[3], 10);
     const modificadores = [];
 
-    // Loop para pegar todos os modificadores (+X, -Y).  Começa em 4.
-    for (let i = 4; i < match.length; i += 2) {
-        if (match[i]) { // Verifica se o grupo de captura existe
-          const sinal = match[i].trim()[0]; //Pega o + ou -
-          const valor = parseInt(match[i+1],10); //Pega o número
-          modificadores.push(sinal === '-' ? -valor : valor); //Adiciona com o sinal correto.
+    // Loop corrigido para começar em 4 e incrementar de 2 em 2
+    for (let i = 4; i < match.length; i++) {
+        if (match[i]) {
+            const modMatch = match[i].match(/([+-])(\d+)/); // Extrai sinal e número
+            if (modMatch) { // Verifica se encontrou sinal e número
+                const sinal = modMatch[1];
+                const valor = parseInt(modMatch[2], 10);
+                modificadores.push(sinal === '-' ? -valor : valor);
+            }
         }
     }
 
-    // Simula as rolagens.
-    const rolagens = [];
-    for (let i = 0; i < numDados; i++) {
-        rolagens.push(Math.floor(Math.random() * facesDado) + 1);
-    }
-
-    // Calcula a soma dos modificadores.
     const somaModificadores = modificadores.reduce((sum, val) => sum + val, 0);
-
-    //Calcula a soma das rolagens
-    const somaRolagens = rolagens.reduce((sum, val) => sum + val, 0);
-
-    // Calcula o total.
-    const total = somaRolagens + somaModificadores;
 
     return {
         numDados: numDados,
         facesDado: facesDado,
-        rolagens: rolagens,
         modificadores: modificadores,
-        somaRolagens: somaRolagens,
-        somaModificadores: somaModificadores,
-        total: total
+        somaModificadores: somaModificadores
     };
 }
 
 function addMessage(nome, userId, conteudo) {
     if(conteudo.indexOf("/r")==0) {
         let cmd = rolarDados(conteudo);
+        console.info(cmd);
         var lab = "Chat Roll";
         var _bonus = cmd.somaModificadores;
         var dice = `${cmd.numDados}d${cmd.facesDado}`;
         var rolagem = getid("char_name").value + " - " + lab;
         var a = dice.split("d");
         randomNum(a[0],a[1]).then((data)=>{
+            console.info(`----------> ${dice}@${data} | ${rolagem} | ${_bonus} | ${lab}`);
             acaoDado(`${dice}@${data}`, rolagem, _bonus, lab);
         });    
         return;
