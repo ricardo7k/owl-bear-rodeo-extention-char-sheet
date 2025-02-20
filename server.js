@@ -48,7 +48,6 @@ app.use(express.static(path.join(__dirname, "public")));
 let PORT = process.env.PORT || 8080;
 
 async function startServer() {
-  PORT=8081;
   app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
   });
