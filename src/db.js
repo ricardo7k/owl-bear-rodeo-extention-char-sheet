@@ -36,9 +36,13 @@ async function getPersonagens(userId) {
     try {
         let query
         if (userId === "JTrgchCJSXeqCmOdBhsuD6ihN5t2") {
-            query = db.collection('personagens');
+            query = db.collection('personagens')
+                    .orderBy("userId")
+                    .orderBy("nome");
         } else {
-            query = db.collection('personagens').where("userId", "==", userId);
+            query = db.collection('personagens')
+                    .where("userId", "==", userId)
+                    .orderBy("nome");
         }
         const querySnapshot = await query.get();
 
@@ -47,6 +51,7 @@ async function getPersonagens(userId) {
         });
     } catch(e) {
         data = ["erro get db", e];
+        console.error(e);
     }
     return data;
 }

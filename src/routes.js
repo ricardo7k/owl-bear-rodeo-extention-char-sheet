@@ -9,9 +9,10 @@ const router = Router();
 
 // Configuração do Gemini
 var GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+var GEMINI_MODEL_VERSION = process.env.GEMINI_MODEL_VERSION;
 
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
+const model = genAI.getGenerativeModel({ model: GEMINI_MODEL_VERSION});
 
 router.get('/name', async (req, res) => {    
     try {
