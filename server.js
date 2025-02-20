@@ -52,6 +52,7 @@ async function startServer() {
     console.log(`Servidor rodando na porta ${PORT}`);
   });
 }
+//Do something
 
 startServer();
 
